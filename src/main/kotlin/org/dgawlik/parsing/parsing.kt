@@ -1,7 +1,6 @@
 package org.dgawlik.parsing
 
-import org.dgawlik.domain.Feature
-import org.dgawlik.domain.Language
+import org.dgawlik.domain.*
 import java.io.File
 
 
@@ -121,7 +120,7 @@ class Parser(val databasePath: String) {
         check("Doesn't have Feature column", ::ParserException) { languagesTable.columns[1] == "Feature" }
         check("Doesn't have Value column", ::ParserException) { languagesTable.columns[2] == "Value" }
         check("Doesn't have Description column", ::ParserException) { languagesTable.columns[3] == "Description" }
-        check("Has blank fields", ::ParserException) { languagesTable.rows.all { oit -> oit.all { it.isNotBlank() } }}
+        check("Has blank fields", ::ParserException) { languagesTable.rows.all { oit -> oit.all { it.isNotBlank() } } }
 
         val featuresTable = Table(text, languagesTable.endingPosition)
 
@@ -131,8 +130,45 @@ class Parser(val databasePath: String) {
         check("Doesn't have Feature column", ::ParserException) { featuresTable.columns[1] == "Description" }
         check("Doesn't have Value column", ::ParserException) { featuresTable.columns[2] == "Type" }
         check("Doesn't have Description column", ::ParserException) { featuresTable.columns[3] == "Min/Max" }
-        check("Has blank fields", ::ParserException) { featuresTable.rows.all { oit -> oit.all { it.isNotBlank() } }}
+        check("Has blank fields", ::ParserException) { featuresTable.rows.all { oit -> oit.all { it.isNotBlank() } } }
 
+        features = featuresTable.rows.map {
+            Feature(
+                it[0],
+                it[1],
+                if (it[2] == "Binary")
+                    BinaryField()
+                else {
+                    val minMax = it[3].split("/")
+                    NumericField(minMax[0].toInt(), minMax[1].toInt())
+                }
+            )
+        }.toTypedArray()
+
+        var currentLanguage:Language? = null
+        for (row in languagesTable.rows) {
+            if (row[0] == "*") {
+                check("Bullet point missing target", ::ParserException) {currentLanguage != null}
+
+                val featureId = row[1]
+
+                val feature = features.find { it.id == featureId }
+                check("Feature id doesn't exist", ::ParserException) {feature != null}
+
+                if(feature!!.fieldType is NumericField) {
+                    val (low, high) = feature.fieldType as NumericField
+                    check("Numeric field out of bounds", ::ParserException) { row[2].toInt() in low..high }
+                }
+
+                val realization = FeatureRealization(feature, row[2].toInt())
+
+                currentLanguage!!.features += realization
+            }
+            else {
+                currentLanguage = Language(row[0], row[3], arrayOf())
+                languages += currentLanguage
+            }
+        }
     }
 
     fun readDatabaseText(databasePath: String): String {

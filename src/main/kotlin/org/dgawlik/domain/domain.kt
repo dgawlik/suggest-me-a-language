@@ -3,7 +3,7 @@ package org.dgawlik.domain
 data class Language(
     val name: String,
     val description: String,
-    val features: Array<FeatureRealization>
+    var features: Array<FeatureRealization>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -26,13 +26,12 @@ data class Language(
     }
 }
 
-interface Field {
-}
+interface FieldType
 
-data class Binary(val value: String) : Field
+class BinaryField: FieldType
 
-data class Numeric(val value: Int, val min: Int, val max: Int) : Field
+data class NumericField(val min: Int, val max: Int) : FieldType
 
-data class FeatureRealization(val feature: Feature, val weight: Int)
+data class FeatureRealization(val feature: Feature, val value: Int)
 
-data class Feature(val id: String, val description: String,  val value: Field)
+data class Feature(val id: String, val description: String,  val fieldType: FieldType)
