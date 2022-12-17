@@ -15,7 +15,7 @@ internal class ParserTest{
 
             | Language     | Feature | Value | Description |
             |--------------|---------|-------|-------------|
-            | Python       |         |       |             |
+            | Python       | LANG1   | 1     | x           |
             
             ### Features
 

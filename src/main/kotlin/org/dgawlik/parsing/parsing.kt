@@ -29,12 +29,12 @@ class Table(text: String, position: Int) {
         pos = p
 
         val (headers, p2) = readTableLine(text, pos)
-        check("No table found", ::TableParsingException) {headers.isNotEmpty()}
+        check("No table found", ::TableParsingException) { headers.isNotEmpty() }
         this.columns = headers
         pos = p2
 
         val (separators, p3) = readTableLine(text, pos)
-        check("No table found", ::TableParsingException) {separators.isNotEmpty()}
+        check("No table found", ::TableParsingException) { separators.isNotEmpty() }
         check("Numer of columns not matching", ::TableParsingException) { separators.size == columns.size }
         pos = p3
 
@@ -49,7 +49,7 @@ class Table(text: String, position: Int) {
             pos = takeWhile(text, pos) { Character.isWhitespace(it) }
         }
 
-        check("Empty table", ::TableParsingException) {rows.isNotEmpty()}
+        check("Empty table", ::TableParsingException) { rows.isNotEmpty() }
 
         endingPosition = pos
     }
@@ -73,7 +73,7 @@ class Table(text: String, position: Int) {
 
         var pos = position
 
-        pos = takeWhile(text, pos) {it != '|'}
+        pos = takeWhile(text, pos) { it != '|' }
 
         while (pos < text.length) {
             val snapshot = pos + 1
@@ -121,6 +121,7 @@ class Parser(val databasePath: String) {
         check("Doesn't have Feature column", ::ParserException) { languagesTable.columns[1] == "Feature" }
         check("Doesn't have Value column", ::ParserException) { languagesTable.columns[2] == "Value" }
         check("Doesn't have Description column", ::ParserException) { languagesTable.columns[3] == "Description" }
+        check("Has blank fields", ::ParserException) { languagesTable.rows.all { oit -> oit.all { it.isNotBlank() } }}
 
         val featuresTable = Table(text, languagesTable.endingPosition)
 
@@ -130,6 +131,7 @@ class Parser(val databasePath: String) {
         check("Doesn't have Feature column", ::ParserException) { featuresTable.columns[1] == "Description" }
         check("Doesn't have Value column", ::ParserException) { featuresTable.columns[2] == "Type" }
         check("Doesn't have Description column", ::ParserException) { featuresTable.columns[3] == "Min/Max" }
+        check("Has blank fields", ::ParserException) { featuresTable.rows.all { oit -> oit.all { it.isNotBlank() } }}
 
     }
 
