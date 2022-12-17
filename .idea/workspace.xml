@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="becfe815-6dd5-4bfb-8814-33674a43a6b7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/domain/domain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/domain/domain.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/parsing/parsing.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/parsing/parsing.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Database.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Database.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/org/dgawlik/parsing/ParserTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/org/dgawlik/parsing/ParserTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/org/dgawlik/parsing/TableTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/org/dgawlik/parsing/TableTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +65,7 @@
       <recent name="org.dgawlik.parsing" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ParserTest.valid_database">
+  <component name="RunManager" selected="Gradle.TableTest">
     <configuration name="ParserTest.valid_database" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -142,8 +137,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ParserTest.valid_database" />
         <item itemvalue="Gradle.TableTest" />
+        <item itemvalue="Gradle.ParserTest.valid_database" />
         <item itemvalue="Gradle.TableTest.valid_table" />
       </list>
     </recent_temporary>
@@ -175,7 +170,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/main/kotlin/org/dgawlik/parsing/parsing.kt</url>
-          <line>129</line>
+          <line>117</line>
           <properties>
             <option name="lambda-ordinal" value="-1" />
           </properties>

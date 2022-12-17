@@ -28,30 +28,28 @@ class Table(text: String, position: Int) {
         this.title = retS
         pos = p
 
-        pos = takeWhile(text, pos) { it != '|' }
-        check("No table found", ::TableParsingException) { pos != text.length }
-
-        val (retHead, p2) = readTableLine(text, pos)
-        this.columns = retHead
+        val (headers, p2) = readTableLine(text, pos)
+        check("No table found", ::TableParsingException) {headers.isNotEmpty()}
+        this.columns = headers
         pos = p2
 
-        pos = takeWhile(text, pos) { it != '|' }
-        check("No table found", ::TableParsingException) { pos != text.length }
-
-        val (retHead2, p3) = readTableLine(text, pos)
-        check("Numer of columns not matching", ::TableParsingException) { retHead2.size == columns.size }
+        val (separators, p3) = readTableLine(text, pos)
+        check("No table found", ::TableParsingException) {separators.isNotEmpty()}
+        check("Numer of columns not matching", ::TableParsingException) { separators.size == columns.size }
         pos = p3
 
         pos = takeWhile(text, pos) { Character.isWhitespace(it) }
-        check("Empty table", ::TableParsingException) { pos != text.length }
 
         while (pos < text.length && text[pos] == '|') {
-            val (retRow, p4) = readTableLine(text, pos)
-            check("Numer of columns not matching", ::TableParsingException) { retRow.size == columns.size }
+            val (line, p4) = readTableLine(text, pos)
+            check("Numer of columns not matching", ::TableParsingException) { line.size == columns.size }
             pos = p4
-            rows += retRow
+            rows += line
+
             pos = takeWhile(text, pos) { Character.isWhitespace(it) }
         }
+
+        check("Empty table", ::TableParsingException) {rows.isNotEmpty()}
 
         endingPosition = pos
     }
@@ -70,28 +68,30 @@ class Table(text: String, position: Int) {
         return Pair(text.substring(snapshot until cur).trim(), cur)
     }
 
-    private fun readTableLine(text: String, cursor: Int): Pair<Array<String>, Int> {
+    private fun readTableLine(text: String, position: Int): Pair<Array<String>, Int> {
         var arr: Array<String> = arrayOf();
 
-        var cur = cursor;
+        var pos = position
 
-        while (true) {
-            val snapshot = cur + 1
-            cur = takeWhile(text, cur + 1) { it != '|' && it != '\n' }
+        pos = takeWhile(text, pos) {it != '|'}
 
-            if (cur == text.length || text[cur] == '\n') {
+        while (pos < text.length) {
+            val snapshot = pos + 1
+            pos = takeWhile(text, pos + 1) { it != '|' && it != '\n' }
+
+            if (pos == text.length || text[pos] == '\n') {
                 check("Unexpected trailer of table row", ::TableParsingException) {
-                    val token = text.substring(snapshot until cur)
+                    val token = text.substring(snapshot until pos)
                     token.all() { Character.isWhitespace(it) }
                 }
                 break
             }
 
-            val token = text.substring(snapshot until cur)
+            val token = text.substring(snapshot until pos)
             arr += token.trim()
         }
 
-        return Pair(arr, cur)
+        return Pair(arr, pos)
     }
 
 
