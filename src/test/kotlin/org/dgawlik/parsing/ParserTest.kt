@@ -3,19 +3,17 @@ package org.dgawlik.parsing
 import io.mockk.every
 import io.mockk.spyk
 import org.dgawlik.domain.BinaryField
-import org.dgawlik.domain.Feature
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import kotlin.test.assertIs
 
-internal class ParserTest{
+internal class ParserTest {
 
     @Test
     @DisplayName("Should parse valid database")
-    fun valid_database(){
+    fun valid_database() {
         val text = """
             ### Languages
 
@@ -33,7 +31,7 @@ internal class ParserTest{
             | LANG17   | Verbosity                | Numeric  | 1/10    |
         """.trimIndent()
 
-        val parser = spyk<Parser>(Parser("mock"))
+        val parser = spyk(Parser("mock"))
 
         every { parser.readDatabaseText("mock") } returns text
 
@@ -46,5 +44,135 @@ internal class ParserTest{
 
         assertEquals(1, parser.languages.size)
         assertEquals(2, parser.languages[0].features.size)
+    }
+
+    @Test
+    @DisplayName("Should throw on no language")
+    fun no_language() {
+        val text = """
+            ### Languages
+
+            | Language     | Feature | Value | Description |
+            |--------------|---------|-------|-------------|
+            | *            | LANG1   | 1     | *           |
+            | *            | LANG17  | 5     | *           |
+            
+            ### Features
+
+            | Id       | Description              | Type     | Min/Max |
+            |----------|--------------------------|----------|---------|
+            | LANG1    | Ease of use              | Binary   | -       |
+            | LANG17   | Verbosity                | Numeric  | 1/10    |
+        """.trimIndent()
+
+        val parser = spyk(Parser("mock"))
+
+        every { parser.readDatabaseText("mock") } returns text
+
+        Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Bullet point missing target")
+    }
+
+    @Test
+    @DisplayName("Should throw on numeric field out of bounds")
+    fun numeric_field_out_of_bounds() {
+        val text = """
+            ### Languages
+
+            | Language     | Feature | Value | Description |
+            |--------------|---------|-------|-------------|
+            | *            | LANG1   | 1     | *           |
+            | *            | LANG17  | 11    | *           |
+            
+            ### Features
+
+            | Id       | Description              | Type     | Min/Max |
+            |----------|--------------------------|----------|---------|
+            | LANG1    | Ease of use              | Binary   | -       |
+            | LANG17   | Verbosity                | Numeric  | 1/10    |
+        """.trimIndent()
+
+        val parser = spyk(Parser("mock"))
+
+        every { parser.readDatabaseText("mock") } returns text
+
+        Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Numeric field out of bounds")
+    }
+
+    @Test
+    @DisplayName("Should throw on unknown field type")
+    fun unknown_field_type() {
+        val text = """
+            ### Languages
+
+            | Language     | Feature | Value | Description |
+            |--------------|---------|-------|-------------|
+            | *            | LANG1   | 1     | *           |
+            | *            | LANG17  | 11    | *           |
+            
+            ### Features
+
+            | Id       | Description              | Type     | Min/Max |
+            |----------|--------------------------|----------|---------|
+            | LANG1    | Ease of use              | Binary   | -       |
+            | LANG17   | Verbosity                | RangeX   | 1/10    |
+        """.trimIndent()
+
+        val parser = spyk(Parser("mock"))
+
+        every { parser.readDatabaseText("mock") } returns text
+
+        Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Field not numeric or binary")
+    }
+
+    @Test
+    @DisplayName("Should throw on invalid bounds definition")
+    fun invalid_bounds_definition() {
+        val text = """
+            ### Languages
+
+            | Language     | Feature | Value | Description |
+            |--------------|---------|-------|-------------|
+            | *            | LANG1   | 1     | *           |
+            | *            | LANG17  | 11    | *           |
+            
+            ### Features
+
+            | Id       | Description              | Type     | Min/Max |
+            |----------|--------------------------|----------|---------|
+            | LANG1    | Ease of use              | Binary   | -       |
+            | LANG17   | Verbosity                | Numeric  | a/b     |
+        """.trimIndent()
+
+        val parser = spyk(Parser("mock"))
+
+        every { parser.readDatabaseText("mock") } returns text
+
+        Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Bounds pattern not matching")
+    }
+
+    @Test
+    @DisplayName("Should throw on empty cell")
+    fun empty_cell() {
+        val text = """
+            ### Languages
+
+            | Language     | Feature | Value | Description |
+            |--------------|---------|-------|-------------|
+            | *            | LANG1   | 1     | *           |
+            | *            |         | 11    | *           |
+            
+            ### Features
+
+            | Id       | Description              | Type     | Min/Max |
+            |----------|--------------------------|----------|---------|
+            | LANG1    | Ease of use              | Binary   | -       |
+            | LANG17   | Verbosity                | Numeric  | a/b     |
+        """.trimIndent()
+
+        val parser = spyk(Parser("mock"))
+
+        every { parser.readDatabaseText("mock") } returns text
+
+        Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Has blank fields")
     }
 }

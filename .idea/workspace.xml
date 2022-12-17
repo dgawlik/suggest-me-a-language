@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="becfe815-6dd5-4bfb-8814-33674a43a6b7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/domain/domain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/domain/domain.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/parsing/parsing.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/parsing/parsing.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/org/dgawlik/parsing/ParserTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/org/dgawlik/parsing/ParserTest.kt" afterDir="false" />
     </list>
@@ -67,7 +66,30 @@
       <recent name="org.dgawlik.parsing" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ParserTest.valid_database">
+  <component name="RunManager" selected="Gradle.ParserTest">
+    <configuration name="ParserTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.dgawlik.parsing.ParserTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="ParserTest.valid_database" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -139,6 +161,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ParserTest" />
         <item itemvalue="Gradle.ParserTest.valid_database" />
         <item itemvalue="Gradle.TableTest" />
         <item itemvalue="Gradle.TableTest.valid_table" />

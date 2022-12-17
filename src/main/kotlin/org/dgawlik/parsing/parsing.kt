@@ -139,23 +139,25 @@ class Parser(val databasePath: String) {
                 if (it[2] == "Binary")
                     BinaryField()
                 else {
+                    check("Field not numeric or binary", ::ParserException) { it[2] == "Numeric" }
+                    check("Bounds pattern not matching", ::ParserException) {  Regex("\\d+/\\d+").matches(it[3])}
                     val minMax = it[3].split("/")
                     NumericField(minMax[0].toInt(), minMax[1].toInt())
                 }
             )
         }.toTypedArray()
 
-        var currentLanguage:Language? = null
+        var currentLanguage: Language? = null
         for (row in languagesTable.rows) {
             if (row[0] == "*") {
-                check("Bullet point missing target", ::ParserException) {currentLanguage != null}
+                check("Bullet point missing target", ::ParserException) { currentLanguage != null }
 
                 val featureId = row[1]
 
                 val feature = features.find { it.id == featureId }
-                check("Feature id doesn't exist", ::ParserException) {feature != null}
+                check("Feature id doesn't exist", ::ParserException) { feature != null }
 
-                if(feature!!.fieldType is NumericField) {
+                if (feature!!.fieldType is NumericField) {
                     val (low, high) = feature.fieldType as NumericField
                     check("Numeric field out of bounds", ::ParserException) { row[2].toInt() in low..high }
                 }
@@ -163,8 +165,7 @@ class Parser(val databasePath: String) {
                 val realization = FeatureRealization(feature, row[2].toInt())
 
                 currentLanguage!!.features += realization
-            }
-            else {
+            } else {
                 currentLanguage = Language(row[0], row[3], arrayOf())
                 languages += currentLanguage
             }
