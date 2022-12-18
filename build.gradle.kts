@@ -29,3 +29,9 @@ tasks.withType<KotlinCompile> {
 application {
     mainClass.set("org.dgawlik.MainKt")
 }
+
+task("describe-language", JavaExec::class) {
+    mainClass.set("org.dgawlik.HelperMainKt")
+    classpath = sourceSets["main"].runtimeClasspath
+    args = arrayOf("./Database.md").asList()
+}
