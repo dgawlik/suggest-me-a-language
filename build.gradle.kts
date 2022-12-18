@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.7.10"
+    id("io.ktor.plugin") version "2.2.1"
     application
 }
 
@@ -30,8 +31,8 @@ application {
     mainClass.set("org.dgawlik.MainKt")
 }
 
-task("describe-language", JavaExec::class) {
-    mainClass.set("org.dgawlik.HelperMainKt")
-    classpath = sourceSets["main"].runtimeClasspath
-    args = arrayOf("./Database.md").asList()
+ktor {
+    fatJar {
+        archiveFileName.set("all.jar")
+    }
 }
