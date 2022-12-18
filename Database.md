@@ -102,6 +102,57 @@
 
 ### Features
 
+**Ease of use**:
+ * is it suitable for beginners?
+ * are errors/bugs easy to detect?
+ * does it have easy syntax mimicking natural language?
+ * is it good for prototyping?
+
+**Expressiveness**:
+ * can you do anything with little code?
+ * can you represent simply complex concepts?
+ * does it have feature rich syntax?
+ * can you deal with duplications easily?
+ * does it have powerful abstractions?
+
+**Conciseness**:
+ * how long is code comparable to other languages?
+ * does it have strange quirks?
+
+**Ecosystem stength**: 
+ * is the audience growing?
+ * is it on stable release train?
+ * how many supporting libraries/tools are there?
+
+**Community support**:
+ * how many posts on StackOverflow?
+ * otherwise are there any active and popular forums to ask questions?
+ * does community participate in language development?
+
+**Maturity**:
+ * is there ecosystem split on major versions?
+ * has it been thoroughly tested by the community?
+ * is it around at least 10 years?
+
+**Stability**:
+ * is there version split in libraries?
+ * are features stable?
+ * does it have long-term support plan?
+
+**Documentation strength**:
+ * is standard library well documented?
+ * are libraries well documented?
+ * is language itself well documented?
+
+**Job offers**:
+ * number of jobs in last year relative to the top language
+
+**Performance**:
+ * benchmarks time of execution relative to the top language
+
+
+
+
 | Id       | Description              | Type    | Min/Max |
 |----------|--------------------------|---------|---------|
 | LANG1    | Ease of use              | Numeric | 1/10    |
