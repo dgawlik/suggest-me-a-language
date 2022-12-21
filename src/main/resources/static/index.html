@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="container">
+    <main class="container" x-data="{ showBrowse: false }">
         <h1 style="font-family: 'Lobster'; font-size: 56px;"> Suggest me <br> a language</h1>
 
         <div style="display:inline-block; width:200px;">
@@ -17,17 +17,29 @@
                     I ...
                 </summary>
                 <ul role="listbox">
-                    <li><a>want to browse</a></li>
-                    <li><a>know the criteria</a></li>
-                    <li><a>need guidance</a></li>
+                    <li x-on:click="showBrowse = true"><a>want to browse</a></li>
+                    <li x-on:click="showBrowse = false"><a>know the criteria</a></li>
+                    <li x-on:click="showBrowse = false"><a>need guidance</a></li>
                 </ul>
             </details>
         </div>
 
-        <div id="browse">
+        <div id="browse" x-show="showBrowse">
             <ul x-data="languages">
-                <template x-for="language in data">
-                    <li x-text="language.name"></li>
+                <template x-for="language in data" :key="language.name">
+                    <article x-data="{showCard: false}">
+                        <h2 x-on:click="showCard = ! showCard" x-text="language.name"></h2>
+                        <div x-show="showCard">
+                            <p x-text="language.description"></p>
+                            <ul>
+                                <template x-for="feature in language.features" >
+                                    <template x-if="feature.value > 0">
+                                        <li x-text="featureDescription(feature)"></li>
+                                    </template>
+                                </template>
+                            </ul>
+                        </div>
+                    </article>
                 </template>
             </ul>
         </div>
@@ -52,6 +64,15 @@
                 this.data = r
             }
         };
+
+        const featureDescription = (feature) => {
+            if (feature.feature.fieldType.min) {
+                return `${feature.feature.description} [${feature.feature.fieldType.min}/${feature.feature.fieldType.max}] = ${feature.value}`
+            }
+            else {
+                return feature.feature.description
+            }
+        }
 
     </script>
 </body>
