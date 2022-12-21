@@ -1,10 +1,19 @@
 package org.dgawlik
 
-import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import org.dgawlik.domain.BinaryField
+import org.dgawlik.domain.Feature
+import org.dgawlik.domain.Language
+import org.dgawlik.parsing.Parser
+import org.http4k.core.Body
+import org.http4k.core.Method
+import org.http4k.core.Response
+import org.http4k.core.Status.Companion.OK
+import org.http4k.core.with
+import org.http4k.format.Jackson.auto
+import org.http4k.routing.bind
+import org.http4k.routing.routes
+import org.http4k.server.SunHttp
+import org.http4k.server.asServer
 
 
 const val banner = """ 
@@ -43,18 +52,28 @@ const val banner = """
 fun main() {
     println(banner)
 
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
-}
+    val port = 8080
 
-fun Application.module() {
-    configureRouting()
-}
+    val db = BinaryField::class.java.getResource("/Database.md")!!.readText()
+    val index = BinaryField::class.java.getResource("/static/index.html")!!.readText()
 
-fun Application.configureRouting() {
-    routing {
-        get("/") {
-            call.respondText("Hello World!")
+    val parser = Parser(db)
+    parser.parse()
+
+    val languageLens = Body.auto<Array<Language>>().toLens()
+    val featureLens = Body.auto<Array<Feature>>().toLens()
+
+    routes(
+        "/languages" bind Method.GET to {
+            Response(OK).with(languageLens of parser.languages)
+        },
+        "/features" bind Method.GET to {
+            Response(OK).with(featureLens of parser.features)
+        },
+        "/" bind Method.GET to {
+            Response(OK).header("Content-Type", "text/html;charset=UTF-8").body(index)
         }
-    }
+    ).asServer(SunHttp(port)).start()
+
+    println("Listening on http://0.0.0.0:${port}/")
 }

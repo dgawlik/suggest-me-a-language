@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="becfe815-6dd5-4bfb-8814-33674a43a6b7" name="Changes" comment="">
+    <list default="true" id="becfe815-6dd5-4bfb-8814-33674a43a6b7" name="Changes" comment="configured webserver">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/domain/domain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/domain/domain.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/parsing/parsing.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/parsing/parsing.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/org/dgawlik/parsing/ParserTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/org/dgawlik/parsing/ParserTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +60,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
-        <option value="JUnit5 Test Class" />
         <option value="Kotlin File" />
       </list>
     </option>
@@ -82,9 +90,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/kotlin" />
       <recent name="$PROJECT_DIR$/src/main/kotlin/org/dgawlik" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/main/kotlin/org/dgawlik/domain" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -93,11 +103,12 @@
       <recent name="org.dgawlik.domain" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.dgawlik" />
       <recent name="org.dgawlik.parsing" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.LanguageRecommender [buildFatJar]">
-    <configuration name="LanguageRecommender [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Kotlin.MainKt">
+    <configuration name="LanguageRecommender [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -108,7 +119,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="assemble" />
+            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -118,7 +129,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="LanguageRecommender [buildFatJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="LanguageRecommender [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -129,7 +140,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="buildFatJar" />
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -139,7 +150,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="LanguageRecommender [describe-language]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="LanguageRecommender [runFatJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -150,28 +161,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="describe-language" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="LanguageRecommender [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="jar" />
+            <option value="runFatJar" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -204,12 +194,19 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.dgawlik.MainKt" />
+      <module name="LanguageRecommender.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.LanguageRecommender [buildFatJar]" />
-        <item itemvalue="Gradle.LanguageRecommender [assemble]" />
-        <item itemvalue="Gradle.LanguageRecommender [jar]" />
-        <item itemvalue="Gradle.LanguageRecommender [describe-language]" />
+        <item itemvalue="Kotlin.MainKt" />
+        <item itemvalue="Gradle.LanguageRecommender [runFatJar]" />
+        <item itemvalue="Gradle.LanguageRecommender [build]" />
+        <item itemvalue="Gradle.LanguageRecommender [clean]" />
         <item itemvalue="Gradle.ParserTest" />
       </list>
     </recent_temporary>
@@ -223,6 +220,147 @@
       <option name="presentableId" value="Default" />
       <updated>1671048188481</updated>
     </task>
+    <task id="LOCAL-00001" summary="added VBA to the database">
+      <created>1671446186409</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1671446186409</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added Javascript and Asm to the database">
+      <created>1671454807726</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671454807726</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added PHP to the database">
+      <created>1671456513641</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1671456513641</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added R to the database">
+      <created>1671457487013</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671457487013</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added Go to the database">
+      <created>1671458349560</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671458349560</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added Swift to the database">
+      <created>1671464630393</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671464630393</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added Delphi to the database">
+      <created>1671466877720</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671466877720</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added Ruby to the database">
+      <created>1671471473655</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671471473655</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added Perl to the database">
+      <created>1671472478576</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1671472478576</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added Objective C to the database">
+      <created>1671473384398</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671473384398</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added Rust to the database">
+      <created>1671473855731</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671473855731</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added languages to the database">
+      <created>1671483237041</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671483237041</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added languages to the database">
+      <created>1671485871568</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1671485871568</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added languages to the database">
+      <created>1671486878330</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1671486878330</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added languages to the database">
+      <created>1671531637204</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1671531637204</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added languages to the database">
+      <created>1671532521046</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1671532521046</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added languages to the database">
+      <created>1671541963494</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1671541963494</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added languages to the database">
+      <created>1671547777619</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1671547777619</updated>
+    </task>
+    <task id="LOCAL-00019" summary="banner, services and their tests">
+      <created>1671568819020</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1671568819020</updated>
+    </task>
+    <task id="LOCAL-00020" summary="configured webserver">
+      <created>1671617707700</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1671617707700</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -235,5 +373,33 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added VBA to the database" />
+    <MESSAGE value="added Javascript and Asm to the database" />
+    <MESSAGE value="added PHP to the database" />
+    <MESSAGE value="added R to the database" />
+    <MESSAGE value="added Go to the database" />
+    <MESSAGE value="added Swift to the database" />
+    <MESSAGE value="added Delphi to the database" />
+    <MESSAGE value="added Ruby to the database" />
+    <MESSAGE value="added Perl to the database" />
+    <MESSAGE value="added Objective C to the database" />
+    <MESSAGE value="added Rust to the database" />
+    <MESSAGE value="added languages to the database" />
+    <MESSAGE value="banner, services and their tests" />
+    <MESSAGE value="configured webserver" />
+    <option name="LAST_COMMIT_MESSAGE" value="configured webserver" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-serialization-kotlinx-jvm/2.2.1/7caaaf79fe39a16c9f5fe024b8341e8fae056536/ktor-serialization-kotlinx-jvm-2.2.1-sources.jar!/commonMain/io/ktor/serialization/kotlinx/SerializerLookup.kt</url>
+          <line>33</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

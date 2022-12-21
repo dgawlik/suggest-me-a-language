@@ -1,9 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.7.22"
     id("io.ktor.plugin") version "2.2.1"
     application
+    kotlin("plugin.serialization").version("1.7.22")
 }
 
 group = "org.example"
@@ -17,9 +18,11 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("io.mockk:mockk:1.13.3")
     implementation(kotlin("reflect"))
-    implementation("io.ktor:ktor-server-core:2.2.1")
-    implementation("io.ktor:ktor-server-netty:2.2.1")
+    implementation(platform("org.http4k:http4k-bom:4.34.4.0"))
+    implementation("org.http4k:http4k-core")
+    implementation("org.http4k:http4k-format-jackson")
     implementation("ch.qos.logback:logback-classic:1.4.5")
+
 }
 
 tasks.test {
@@ -27,10 +30,11 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 application {
+    mainModule.set("org.dgawlik")
     mainClass.set("org.dgawlik.MainKt")
 }
 

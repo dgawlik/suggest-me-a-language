@@ -1,7 +1,5 @@
 package org.dgawlik.parsing
 
-import io.mockk.every
-import io.mockk.spyk
 import org.dgawlik.domain.BinaryField
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -31,9 +29,8 @@ internal class ParserTest {
             | LANG17   | Verbosity                | Numeric  | 1/10    |
         """.trimIndent()
 
-        val parser = spyk(Parser("mock"))
 
-        every { parser.readDatabaseText("mock") } returns text
+        val parser = Parser(text)
 
         parser.parse()
 
@@ -65,9 +62,7 @@ internal class ParserTest {
             | LANG17   | Verbosity                | Numeric  | 1/10    |
         """.trimIndent()
 
-        val parser = spyk(Parser("mock"))
-
-        every { parser.readDatabaseText("mock") } returns text
+        val parser = Parser(text)
 
         Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Bullet point missing target")
     }
@@ -91,9 +86,7 @@ internal class ParserTest {
             | LANG17   | Verbosity                | Numeric  | 1/10    |
         """.trimIndent()
 
-        val parser = spyk(Parser("mock"))
-
-        every { parser.readDatabaseText("mock") } returns text
+        val parser = Parser(text)
 
         Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Numeric field out of bounds")
     }
@@ -117,9 +110,7 @@ internal class ParserTest {
             | LANG17   | Verbosity                | RangeX   | 1/10    |
         """.trimIndent()
 
-        val parser = spyk(Parser("mock"))
-
-        every { parser.readDatabaseText("mock") } returns text
+        val parser = Parser(text)
 
         Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Field not numeric or binary")
     }
@@ -143,9 +134,7 @@ internal class ParserTest {
             | LANG17   | Verbosity                | Numeric  | a/b     |
         """.trimIndent()
 
-        val parser = spyk(Parser("mock"))
-
-        every { parser.readDatabaseText("mock") } returns text
+        val parser = Parser(text)
 
         Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Bounds pattern not matching")
     }
@@ -169,9 +158,7 @@ internal class ParserTest {
             | LANG17   | Verbosity                | Numeric  | a/b     |
         """.trimIndent()
 
-        val parser = spyk(Parser("mock"))
-
-        every { parser.readDatabaseText("mock") } returns text
+        val parser = Parser(text)
 
         Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Has blank fields")
     }

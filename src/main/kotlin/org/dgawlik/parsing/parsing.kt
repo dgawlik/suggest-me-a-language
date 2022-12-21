@@ -1,7 +1,6 @@
 package org.dgawlik.parsing
 
 import org.dgawlik.domain.*
-import java.io.File
 
 
 fun <T : Throwable> check(failMessage: String, ctor: (msg: String) -> T, pred: () -> Boolean) {
@@ -54,22 +53,21 @@ class Table(text: String, position: Int) {
     }
 
     private fun readHeader(text: String, cursor: Int): Pair<String, Int> {
-        var cur = cursor;
+        var cur = cursor
 
         cur = takeWhile(text, cur) { it != '#' }
         check("Can't find header", ::TableParsingException) { cur != text.length }
         cur = takeWhile(text, cur) { it == '#' }
         check("Empty header", ::TableParsingException) { cur != text.length && text[cur] != '\n' }
 
-        val snapshot = cur;
+        val snapshot = cur
         cur = takeWhile(text, cur) { it != '\n' }
 
         return Pair(text.substring(snapshot until cur).trim(), cur)
     }
 
     private fun readTableLine(text: String, position: Int): Pair<Array<String>, Int> {
-        var arr: Array<String> = arrayOf();
-
+        var arr: Array<String> = arrayOf()
         var pos = position
 
         pos = takeWhile(text, pos) { it != '|' }
@@ -95,22 +93,21 @@ class Table(text: String, position: Int) {
 
 
     private fun takeWhile(text: String, start: Int, pred: (Char) -> Boolean): Int {
-        var cur = start;
+        var cur = start
         while (cur < text.length && pred(text[cur])) {
-            cur++;
+            cur++
         }
-        return cur;
+        return cur
     }
 }
 
 
-class Parser(val databasePath: String) {
+class Parser(val text: String) {
 
     var languages: Array<Language> = arrayOf()
     var features: Array<Feature> = arrayOf()
 
     fun parse() {
-        val text = readDatabaseText(databasePath)
 
         val languagesTable = Table(text, 0)
 
@@ -170,9 +167,5 @@ class Parser(val databasePath: String) {
                 languages += currentLanguage
             }
         }
-    }
-
-    fun readDatabaseText(databasePath: String): String {
-        return File(databasePath).readText()
     }
 }

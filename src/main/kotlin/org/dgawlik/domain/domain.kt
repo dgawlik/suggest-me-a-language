@@ -1,5 +1,11 @@
 package org.dgawlik.domain
 
+interface FieldType
+
+class BinaryField: FieldType
+
+data class NumericField(val min: Int, val max: Int) : FieldType
+
 data class Language(
     val name: String,
     val description: String,
@@ -26,12 +32,6 @@ data class Language(
     }
 }
 
-interface FieldType
-
-class BinaryField: FieldType
-
-data class NumericField(val min: Int, val max: Int) : FieldType
+data class Feature(val id: String, val description: String,  val fieldType: FieldType)
 
 data class FeatureRealization(val feature: Feature, val value: Int)
-
-data class Feature(val id: String, val description: String,  val fieldType: FieldType)
