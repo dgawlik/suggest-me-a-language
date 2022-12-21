@@ -17,6 +17,9 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("io.mockk:mockk:1.13.3")
     implementation(kotlin("reflect"))
+    implementation("io.ktor:ktor-server-core:2.2.1")
+    implementation("io.ktor:ktor-server-netty:2.2.1")
+    implementation("ch.qos.logback:logback-classic:1.4.5")
 }
 
 tasks.test {
