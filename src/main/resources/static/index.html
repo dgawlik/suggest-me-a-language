@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="container" x-data="{ showBrowse: false }">
+    <main x-data="state" class="container">
         <h1 style="font-family: 'Lobster'; font-size: 56px;"> Suggest me <br> a language</h1>
 
         <div style="display:inline-block; width:200px;">
@@ -17,16 +17,16 @@
                     I ...
                 </summary>
                 <ul role="listbox">
-                    <li x-on:click="showBrowse = true"><a>want to browse</a></li>
-                    <li x-on:click="showBrowse = false"><a>know the criteria</a></li>
-                    <li x-on:click="showBrowse = false"><a>need guidance</a></li>
+                    <li x-on:click="showBrowse = true; showFillCriteria = false"><a>want to browse</a></li>
+                    <li x-on:click="showBrowse = false; showFillCriteria = true"><a>know the criteria</a></li>
+                    <li x-on:click="showBrowse = false; showFillCriteria = false"><a>need guidance</a></li>
                 </ul>
             </details>
         </div>
 
         <div id="browse" x-show="showBrowse">
-            <ul x-data="languages">
-                <template x-for="language in data" :key="language.name">
+            <ul >
+                <template x-for="language in languages" :key="language.name">
                     <article x-data="{showCard: false}">
                         <h2 x-on:click="showCard = ! showCard" x-text="language.name"></h2>
                         <div x-show="showCard">
@@ -44,14 +44,55 @@
             </ul>
         </div>
 
+        <div id="fillCriteria" x-show="showFillCriteria">
+            <div>
+                <h3>Fill in criteria</h3>
+                <template x-for="feature in features" :key="feature.id">
+                    <label x-data="{active: false, value: ''}">
+                        <input x-on:click="[active, criteria, filteredLanguages] = updateLanguages(active, feature, value, criteria, languages);"
+                               type="checkbox" name="switch" role="switch">
+                        <span x-text="feature.description"></span>
+                        <template x-if="feature.fieldType.min">
+                            <input style="display: inline-block; width: 150px;" type="text" placeholder="at least" x-model="value">
+                        </template>
+                    </label>
+                </template>
+            </div>
+            <div>
+                <h3>Languages</h3>
+                <ul>
+                    <template x-for="language in filteredLanguages" :key="language.name">
+                        <article x-data="{showCard: false}">
+                            <h2 x-on:click="showCard = ! showCard" x-text="language.name"></h2>
+                            <div x-show="showCard">
+                                <p x-text="language.description"></p>
+                                <ul>
+                                    <template x-for="feature in language.features" >
+                                        <template x-if="feature.value > 0">
+                                            <li x-text="featureDescription(feature)"></li>
+                                        </template>
+                                    </template>
+                                </ul>
+                            </div>
+                        </article>
+                    </template>
+                </ul>
+            </div>
+        </div>
+
 
 
 
     </main>
 
     <script type="application/javascript">
-        const languages = {
-            data: [],
+        const state = {
+            languages: [],
+            features: [],
+            showBrowse: false,
+            showFillCriteria: false,
+            criteria: [],
+            filteredLanguages: [],
 
             init() {
                 this.get()
@@ -61,8 +102,34 @@
                 let r = await fetch('/languages')
                 r = await r.json()
 
-                this.data = r
-            }
+                this.languages = r
+                this.filteredLanguages = r
+
+                let f = await fetch('/features')
+                f = await f.json()
+
+                this.features = f;
+                this.criteria = [];
+            },
+
+            updateLanguages(isOn, feature, value, criteria, langs) {
+                let isOn2 = !isOn;
+
+                let criteria2 = null;
+                if(isOn2) {
+                    criteria2 =  criteria.concat([{value: feature.fieldType.min ? value : 1, feature}]);
+                }
+                else {
+                    criteria2 = criteria.filter(item => item.feature.id !== feature.id)
+                }
+                let langs2 = langs.filter(item => {
+                    return criteria2.every( c => {
+                         return item.features.some( f => c.feature.id == f.feature.id && c.value <= f.value );
+                    });
+                });
+
+                return [isOn2, criteria2, langs2];
+            },
         };
 
         const featureDescription = (feature) => {
@@ -72,7 +139,8 @@
             else {
                 return feature.feature.description
             }
-        }
+        };
+
 
     </script>
 </body>
