@@ -8,6 +8,8 @@ import org.dgawlik.domain.NumericField
 
 class SplitterSorterException(msg: String) : RuntimeException(msg)
 
+data class Quad<T1, T2, T3, T4>(val t1: T1, val t2: T2, val t3: T3, val t4: T4)
+
 class SplitterSorter {
 
     fun sort(languages: Array<Language>, selector: Feature): Array<Language> {
@@ -17,12 +19,13 @@ class SplitterSorter {
         }.toTypedArray()
     }
 
-    fun bestSplit(languages: Array<Language>, selector: Feature): Triple<Array<Language>, Array<Language>, Double> {
+    fun bestSplit(languages: Array<Language>, selector: Feature): Quad<Array<Language>, Array<Language>, Double, Int> {
         val sorted = sort(languages, selector)
 
         var left: Array<Language> = arrayOf()
         var right: Array<Language> = arrayOf()
         var minEntropy = 2.0
+        var splitVal = -1
 
         val min: Int
         val max: Int
@@ -36,21 +39,23 @@ class SplitterSorter {
             throw SplitterSorterException("Unknown field type")
         }
 
-        for (split in min..max+1) {
+        for (split in min..max + 1) {
             val (lhs, rhs) = sorted.partition {
                 val value = it.features.find { it2 -> it2.feature.id == selector.id }?.value ?: 0
                 value < split
             }
 
-            val thisEntropy = Histogram(selector, lhs.toTypedArray()).entropy() + Histogram(selector, rhs.toTypedArray()).entropy()
+            val thisEntropy =
+                Histogram(selector, lhs.toTypedArray()).entropy() + Histogram(selector, rhs.toTypedArray()).entropy()
 
-            if(thisEntropy < minEntropy) {
+            if (thisEntropy < minEntropy) {
                 minEntropy = thisEntropy
                 left = lhs.toTypedArray()
                 right = rhs.toTypedArray()
+                splitVal = split
             }
         }
 
-        return Triple(left, right, minEntropy)
+        return Quad(left, right, minEntropy, splitVal)
     }
 }
