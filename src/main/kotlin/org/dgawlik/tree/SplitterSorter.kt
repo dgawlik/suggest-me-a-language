@@ -24,7 +24,7 @@ class SplitterSorter {
 
         var left: Array<Language> = arrayOf()
         var right: Array<Language> = arrayOf()
-        var minEntropy = 2.0
+        var minEntropy = Double.MAX_VALUE
         var splitVal = -1
 
         val min: Int

@@ -4,6 +4,7 @@ import org.dgawlik.domain.BinaryField
 import org.dgawlik.domain.Feature
 import org.dgawlik.domain.FeatureRealization
 import org.dgawlik.domain.Language
+import org.dgawlik.parsing.Parser
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -39,5 +40,16 @@ internal class HistogramTest {
         val hist = Histogram(f1, array)
 
         assertEquals(1.0, hist.entropy())
+    }
+
+    @Test
+    @DisplayName("x")
+    fun x() {
+        val db = BinaryField::class.java.getResource("/Database.md")!!.readText()
+        val parser = Parser(db)
+        parser.parse()
+
+        val hist = Histogram(parser.features[0], parser.languages)
+        hist.entropy()
     }
 }

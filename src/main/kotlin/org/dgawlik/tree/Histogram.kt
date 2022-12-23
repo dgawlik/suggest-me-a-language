@@ -5,6 +5,7 @@ import org.dgawlik.domain.Feature
 import org.dgawlik.domain.Language
 import org.dgawlik.domain.NumericField
 import kotlin.math.log
+import kotlin.math.log2
 
 
 class HistogramException(msg: String) : RuntimeException(msg)
@@ -37,7 +38,7 @@ class Histogram(selector: Feature, array: Array<Language>) {
         }
 
         array.forEach {
-            val fr = it.features.find { it.feature.id == selector.id }?.value ?: 0
+            val fr = it.features.find { it.feature.id == selector.id }?.value ?: throw HistogramException("Feature not found")
             counts[fr - min]++
         }
 
@@ -49,7 +50,7 @@ class Histogram(selector: Feature, array: Array<Language>) {
         counts.forEach {
             val p = (it.toDouble()) / (total.toDouble())
             if (p > 0) {
-                sum -= p * log(p, 2.0)
+                sum -= p * log(p, counts.size.toDouble())
             }
         }
         return sum

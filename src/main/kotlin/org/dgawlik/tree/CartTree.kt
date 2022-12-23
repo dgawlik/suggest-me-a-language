@@ -13,7 +13,7 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
 
         fun buildTree(array: Array<Language>, features: Array<Feature>): TreeNode {
 
-            var root = TreeNode(null, null, null, null)
+            val root = TreeNode(null, null, null, null)
             val queue = ArrayDeque<TreeNode>()
             val spSor = SplitterSorter()
             var candidateFeatures = features.copyOf()
@@ -58,7 +58,7 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
 
             var it: TreeNode? = node
             var parent: TreeNode? = node.parent
-            while (parent != null) {
+            while (parent !== null) {
                 val rule = parent.rule
                 val isLeft = parent.left == it
 
