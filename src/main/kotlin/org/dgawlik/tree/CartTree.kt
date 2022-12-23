@@ -7,77 +7,88 @@ import org.dgawlik.domain.Language
 
 class CartTree(array: Array<Language>, features: Array<Feature>) {
 
-    var root = TreeNode(null, null, null, null)
+    val root = buildTree(array, features)
 
-    init {
-        val queue = ArrayDeque<TreeNode>()
-        val spSor = SplitterSorter()
-        var candidateFeatures = features.copyOf()
-        queue.addLast(root)
+    companion object {
 
-        while (queue.isNotEmpty() && candidateFeatures.isNotEmpty()) {
-            val node = queue.removeFirst();
-            val workArray = array.filter { compositeCriteria(node)(it) }.toTypedArray()
+        fun buildTree(array: Array<Language>, features: Array<Feature>): TreeNode {
 
-            var minEntropy = Double.MAX_VALUE
-            var bestRule: FeatureRealization? = null
-            for (candidate in candidateFeatures) {
-                val (lhs, rhs, _, splitVal) = spSor.bestSplit(workArray, candidate)
+            var root = TreeNode(null, null, null, null)
+            val queue = ArrayDeque<TreeNode>()
+            val spSor = SplitterSorter()
+            var candidateFeatures = features.copyOf()
+            queue.addLast(root)
 
-                val lhsScore = totalEntropy(lhs, candidateFeatures)
-                val rhsScore = totalEntropy(rhs, candidateFeatures)
+            while (queue.isNotEmpty() && candidateFeatures.isNotEmpty()) {
+                val node = queue.removeFirst();
+                val workArray = array.filter { compositeCriteria(node)(it) }.toTypedArray()
 
-                if(lhsScore + rhsScore < minEntropy) {
-                    minEntropy = lhsScore + rhsScore
-                    bestRule = FeatureRealization(candidate, splitVal)
+                var minEntropy = Double.MAX_VALUE
+                var bestRule: FeatureRealization? = null
+                for (candidate in candidateFeatures) {
+                    val (lhs, rhs, _, splitVal) = spSor.bestSplit(workArray, candidate)
+
+                    val lhsScore = totalEntropy(lhs, candidateFeatures)
+                    val rhsScore = totalEntropy(rhs, candidateFeatures)
+
+                    if (lhsScore + rhsScore < minEntropy) {
+                        minEntropy = lhsScore + rhsScore
+                        bestRule = FeatureRealization(candidate, splitVal)
+                    }
                 }
+
+                candidateFeatures = candidateFeatures.filter { it.id != bestRule!!.feature.id }.toTypedArray()
+
+                val leftChild = TreeNode(node, null, null, null)
+                val rightChild = TreeNode(node, null, null, null)
+
+                node.left = leftChild
+                node.right = rightChild
+                node.rule = bestRule
+
+                queue.addLast(leftChild)
+                queue.addLast(rightChild)
             }
 
-            candidateFeatures = candidateFeatures.filter { it.id != bestRule!!.feature.id }.toTypedArray()
-
-            val leftChild = TreeNode(node, null, null, null)
-            val rightChild = TreeNode(node, null, null, null)
-
-            node.left = leftChild
-            node.right = rightChild
-            node.rule = bestRule
-
-            queue.addLast(leftChild)
-            queue.addLast(rightChild)
+            return root
         }
 
-    }
+        fun compositeCriteria(node: TreeNode): (Language) -> Boolean {
+            var checks = arrayOf<(Language) -> Boolean>()
 
-    fun compositeCriteria(node: TreeNode): (Language) -> Boolean {
-        var checks = arrayOf<(Language) -> Boolean>()
+            var it: TreeNode? = node
+            var parent: TreeNode? = node.parent
+            while (parent != null) {
+                val rule = parent.rule
+                val isLeft = parent.left == it
 
-        var it: TreeNode? = node
-        while (it != null) {
-            val rule = it.rule
-            if (rule != null) {
                 checks += { lang: Language ->
-                    val value = lang.features.find { it.feature.id == rule.feature.id }?.value ?: 0
-                    value < rule.value
+                    val value = lang.features.find { it.feature.id == rule!!.feature.id }?.value ?: 0
+                    if (isLeft) {
+                        value < rule!!.value
+                    } else {
+                        value >= rule!!.value
+                    }
+                }
+                parent = parent.parent
+                it = it?.parent
+            }
+
+            return { lang ->
+                if (checks.isEmpty()) {
+                    true
+                } else {
+                    checks.all { it(lang) }
                 }
             }
-            it = it.parent
         }
 
-        return { lang ->
-            if(checks.isEmpty()){
-                true
+        fun totalEntropy(langs: Array<Language>, features: Array<Feature>): Double {
+            var sum = 0.0
+            for (ft in features) {
+                sum += Histogram(ft, langs).entropy()
             }
-            else {
-                checks.all { it(lang) } }
-            }
-    }
-
-    fun totalEntropy(langs: Array<Language>, features: Array<Feature>): Double {
-        var sum = 0.0
-        for ( ft in features) {
-            sum += Histogram(ft, langs).entropy()
+            return sum
         }
-        return sum
     }
-
 }
