@@ -27,8 +27,8 @@
         <div id="browse" x-show="showBrowse">
             <ul >
                 <template x-for="language in languages" :key="language.name">
-                    <article x-data="{showCard: false}">
-                        <h2 x-on:click="showCard = ! showCard" x-text="language.name"></h2>
+                    <article x-data="{showCard: false}"  x-on:click="showCard = ! showCard">
+                        <h2 x-text="language.name"></h2>
                         <div x-show="showCard">
                             <p x-text="language.description"></p>
                             <ul>
@@ -62,8 +62,8 @@
                 <h3>Languages</h3>
                 <ul>
                     <template x-for="language in filteredLanguages" :key="language.name">
-                        <article x-data="{showCard: false}">
-                            <h2 x-on:click="showCard = ! showCard" x-text="language.name"></h2>
+                        <article x-data="{showCard: false}" x-on:click="showCard = ! showCard">
+                            <h2  x-text="language.name"></h2>
                             <div x-show="showCard">
                                 <p x-text="language.description"></p>
                                 <ul>
