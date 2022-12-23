@@ -2,14 +2,14 @@ package org.dgawlik.tree
 
 import org.dgawlik.domain.BinaryField
 import org.dgawlik.domain.Feature
-import org.dgawlik.domain.FeatureRealization
+import org.dgawlik.domain.Language
 import org.dgawlik.domain.NumericField
 import kotlin.math.log
 
 
 class HistogramException(msg: String) : RuntimeException(msg)
 
-class Histogram(selector: Feature, array: Array<FeatureRealization>) {
+class Histogram(selector: Feature, array: Array<Language>) {
 
     var counts: Array<Int> = arrayOf()
     var total: Int
@@ -37,7 +37,8 @@ class Histogram(selector: Feature, array: Array<FeatureRealization>) {
         }
 
         array.forEach {
-            counts[it.value - min]++
+            val fr = it.features.find { it.feature.id == selector.id }?.value ?: 0
+            counts[fr - min]++
         }
 
         total = counts.sum()
@@ -47,7 +48,7 @@ class Histogram(selector: Feature, array: Array<FeatureRealization>) {
         var sum = 0.0
         counts.forEach {
             val p = (it.toDouble()) / (total.toDouble())
-            if(p > 0){
+            if (p > 0) {
                 sum -= p * log(p, 2.0)
             }
         }
