@@ -188,7 +188,7 @@
                 let tree2 = tree.right;
                 let question2 = this.question(tree2);
                 let langs2 = langs.filter(item => {
-                    return item.features.some( f => tree2.rule.feature.id == f.feature.id && tree2.rule.value <= f.value );
+                    return item.features.some( f => tree.rule.feature.id == f.feature.id && tree.rule.value <= f.value );
                 });
 
                 return [question2, answered2, tree2, langs2];

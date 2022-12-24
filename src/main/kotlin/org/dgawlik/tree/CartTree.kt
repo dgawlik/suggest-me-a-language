@@ -23,7 +23,7 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
                 val node = queue.removeFirst();
                 val workArray = array.filter { compositeCriteria(node)(it) }.toTypedArray()
 
-                if(workArray.isEmpty()){
+                if (workArray.isEmpty()) {
                     continue
                 }
 
@@ -64,13 +64,10 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
             var parent: TreeNode? = node.parent
             while (parent !== null) {
                 val rule = parent.rule
-                val isLeft = parent.left == it
 
-                checks += { lang: Language ->
-                    val value = lang.features.find { it.feature.id == rule!!.feature.id }?.value ?: 0
-                    if (isLeft) {
-                        value < rule!!.value
-                    } else {
+                if (parent.right == it) {
+                    checks += { lang: Language ->
+                        val value = lang.features.find { it.feature.id == rule!!.feature.id }?.value ?: 0
                         value >= rule!!.value
                     }
                 }
