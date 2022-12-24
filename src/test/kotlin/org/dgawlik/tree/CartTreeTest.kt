@@ -30,7 +30,6 @@ internal class CartTreeTest{
 
     @Test
     @DisplayName("should create valid composite criteria")
-    @Ignore
     fun composite_criteria(){
         val array = arrayOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1), FeatureRealization(f2, 0))),
@@ -42,12 +41,12 @@ internal class CartTreeTest{
         root.left =  TreeNode(root, null, null, null)
         root.right = TreeNode(root, null, null, null)
 
-        val criteria = CartTree.compositeCriteria(root.left!!)
+        val criteria = CartTree.compositeCriteria(root.right!!)
 
         val result = array.filter {criteria(it)}
 
         assertEquals(1, result.size)
-        assertEquals("L2", result[0].name)
+        assertEquals("L1", result[0].name)
     }
 
     @Test

@@ -13,9 +13,15 @@ class SplitterSorterException(msg: String) : RuntimeException(msg)
 class SplitterSorter {
 
     fun sort(languages: List<Language>, selector: Feature): List<Language> {
+        val index = languages.getOrNull(0)?.features?.indexOfFirst { it.feature.id == selector.id } ?: -1
+        if(index == -1){
+            throw SplitterSorterException("Feature not found")
+        }
+
+        val map = languages.associate { it.name to it.features[index] }
+
         return languages.sortedBy {
-            val value = it.features.find { it2 -> it2.feature.id == selector.id }?.value ?: 0
-            value
+            map[it.name]!!.value
         }
     }
 
@@ -45,10 +51,16 @@ class SplitterSorter {
             }
         }
 
+        val index = languages.getOrNull(0)?.features?.indexOfFirst { it.feature.id == selector.id } ?: -1
+        if(index == -1){
+            throw SplitterSorterException("Feature not found")
+        }
+
+        val map = languages.associate { it.name to it.features[index] }
+
         for (split in min+1..max + 1) {
             val (lhs, rhs) = sorted.partition {
-                val value = it.features.find { it2 -> it2.feature.id == selector.id }?.value ?: 0
-                value < split
+                map[it.name]!!.value < split
             }
 
             val distance = abs(languages.size/2 - lhs.size)
