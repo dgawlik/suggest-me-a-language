@@ -40,7 +40,7 @@ class SplitterSorter {
             throw SplitterSorterException("Unknown field type")
         }
 
-        for (split in min..max + 1) {
+        for (split in min+1..max + 1) {
             val (lhs, rhs) = sorted.partition {
                 val value = it.features.find { it2 -> it2.feature.id == selector.id }?.value ?: 0
                 value < split

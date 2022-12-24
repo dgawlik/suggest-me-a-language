@@ -53,9 +53,9 @@ internal class SplitterSorterTest{
         )
 
         val (left, right) = SplitterSorter().bestSplit(array, f1)
-        assertEquals(0, left.size)
-        assertEquals(2, right.size)
+        assertEquals(2, left.size)
+        assertEquals(0, right.size)
 
-        assertArrayEquals(arrayOf("L1", "L2"), right.map { it.name }.toTypedArray())
+        assertArrayEquals(arrayOf("L1", "L2"), left.map { it.name }.toTypedArray())
     }
 }
