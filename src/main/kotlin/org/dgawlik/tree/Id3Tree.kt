@@ -5,7 +5,7 @@ import org.dgawlik.domain.FeatureRealization
 import org.dgawlik.domain.Language
 
 
-class CartTree(array: Array<Language>, features: Array<Feature>) {
+class Id3Tree(array: Array<Language>, features: Array<Feature>) {
 
     val root = buildTree(array, features)
 

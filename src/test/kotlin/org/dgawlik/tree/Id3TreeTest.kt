@@ -8,9 +8,8 @@ import org.dgawlik.parsing.Parser
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import kotlin.test.Ignore
 
-internal class CartTreeTest{
+internal class Id3TreeTest{
 
     val f1 = Feature("LANG1", "first feature", BinaryField())
     val f2 = Feature("LANG2", "second feature", BinaryField())
@@ -23,7 +22,7 @@ internal class CartTreeTest{
             Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0), FeatureRealization(f2, 1)))
         )
 
-        val result = CartTree.totalEntropy(array, arrayListOf(f1, f2))
+        val result = Id3Tree.totalEntropy(array, arrayListOf(f1, f2))
 
         assertEquals(2.0, result)
     }
@@ -41,7 +40,7 @@ internal class CartTreeTest{
         root.left =  TreeNode(root, null, null, null)
         root.right = TreeNode(root, null, null, null)
 
-        val criteria = CartTree.compositeCriteria(root.right!!)
+        val criteria = Id3Tree.compositeCriteria(root.right!!)
 
         val result = array.filter {criteria(it)}
 
@@ -56,7 +55,7 @@ internal class CartTreeTest{
         val parser = Parser(db)
         parser.parse()
 
-        val cart = CartTree(parser.languages, parser.features)
+        val cart = Id3Tree(parser.languages, parser.features)
         assertNotNull(cart.root)
     }
 }

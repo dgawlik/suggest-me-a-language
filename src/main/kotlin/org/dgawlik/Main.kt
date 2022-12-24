@@ -4,7 +4,7 @@ import org.dgawlik.domain.BinaryField
 import org.dgawlik.domain.Feature
 import org.dgawlik.domain.Language
 import org.dgawlik.parsing.Parser
-import org.dgawlik.tree.CartTree
+import org.dgawlik.tree.Id3Tree
 import org.dgawlik.tree.TreeNode
 import org.http4k.core.Body
 import org.http4k.core.Method
@@ -62,7 +62,7 @@ fun main() {
     val parser = Parser(db)
     parser.parse()
 
-    val cart = CartTree(parser.languages, parser.features)
+    val cart = Id3Tree(parser.languages, parser.features)
 
     val languageLens = Body.auto<Array<Language>>().toLens()
     val featureLens = Body.auto<Array<Feature>>().toLens()
