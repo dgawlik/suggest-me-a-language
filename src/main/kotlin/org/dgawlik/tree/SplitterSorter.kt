@@ -47,8 +47,8 @@ class SplitterSorter {
             }
 
             val thisEntropy =
-                Histogram(selector, lhs.toTypedArray()).conditionalEntropy(sortedHist) +
-                        Histogram(selector, rhs.toTypedArray()).conditionalEntropy(sortedHist)
+                Histogram(selector, lhs.toTypedArray()).entropyGiven(sortedHist) +
+                        Histogram(selector, rhs.toTypedArray()).entropyGiven(sortedHist)
 
             if (thisEntropy < minEntropy) {
                 minEntropy = thisEntropy

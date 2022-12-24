@@ -1,7 +1,6 @@
 package org.dgawlik.tree
 
 import org.dgawlik.domain.*
-import org.dgawlik.parsing.Parser
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -70,6 +69,6 @@ internal class HistogramTest {
 
         val childHist = Histogram(f2, childArray)
 
-        assertEquals(0.0, childHist.conditionalEntropy(parentHist))
+        assertEquals(0.0, childHist.entropyGiven(parentHist))
     }
 }

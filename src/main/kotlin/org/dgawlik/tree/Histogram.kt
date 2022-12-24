@@ -5,7 +5,6 @@ import org.dgawlik.domain.Feature
 import org.dgawlik.domain.Language
 import org.dgawlik.domain.NumericField
 import kotlin.math.log
-import kotlin.math.log2
 
 
 class HistogramException(msg: String) : RuntimeException(msg)
@@ -56,14 +55,14 @@ class Histogram(selector: Feature, array: Array<Language>) {
         return sum
     }
 
-    fun conditionalEntropy(parent: Histogram): Double {
+    fun entropyGiven(parent: Histogram): Double {
         var sum = 0.0
         for( (index, value) in counts.withIndex() ) {
             val pA = total.toDouble()/parent.total.toDouble()
             val pB = parent.counts[index].toDouble() / parent.total.toDouble()
             val pBA = (value.toDouble()) / total.toDouble()
 
-            if (pA > 0 && pBA > 0) {
+            if (pA > 0 && pBA > 0 && pB > 0) {
                 sum -= (pA*pBA/pB) * log(pA*pBA/pB, counts.size.toDouble())
             }
         }
