@@ -81,7 +81,35 @@
         </div>
 
         <div id="showTree" x-show="showTree">
-            Show tree
+            <div style="margin-bottom: 40px;">
+                <h3>Answer questions</h3>
+                <ul x-html="alreadyAnswered">
+
+                </ul>
+                <p x-text="currentQuestion"></p>
+                <a  href="#" role="button" x-on:click="[currentQuestion, alreadyAnswered, tree] = traverseTreeLeft(tree, alreadyAnswered);">No</a>
+                <a  href="#" role="button" x-on:click="[currentQuestion, alreadyAnswered, tree, treeFilteredLanguages] = traverseTreeRight(tree, alreadyAnswered, treeFilteredLanguages);">Yes</a>
+            </div>
+            <div >
+                <h3>Languages</h3>
+                <ul>
+                    <template x-for="language in treeFilteredLanguages" :key="language.name">
+                        <article x-data="{showCard: false}" x-on:click="showCard = ! showCard">
+                            <h2  x-text="language.name"></h2>
+                            <div x-show="showCard">
+                                <p x-text="language.description"></p>
+                                <ul>
+                                    <template x-for="feature in language.features" >
+                                        <template x-if="feature.value > 0">
+                                            <li x-text="featureDescription(feature)"></li>
+                                        </template>
+                                    </template>
+                                </ul>
+                            </div>
+                        </article>
+                    </template>
+                </ul>
+            </div>
         </div>
 
 
@@ -96,8 +124,11 @@
             showTree: false,
             criteria: [],
             filteredLanguages: [],
+            treeFilteredLanguages: [],
             treeCriteria: [],
             tree: null,
+            alreadyAnswered: "",
+            currentQuestion: "",
 
             init() {
                 this.get()
@@ -109,6 +140,7 @@
 
                 this.languages = r
                 this.filteredLanguages = r
+                this.treeFilteredLanguages = r
 
                 let f = await fetch('/features')
                 f = await f.json()
@@ -116,10 +148,11 @@
                 this.features = f;
                 this.criteria = [];
 
-                let t = await('/tree')
+                let t = await fetch('/tree')
                 t = await t.json()
 
                 this.tree = t
+                this.currentQuestion = this.question(this.tree);
             },
 
             updateLanguages(isOn, feature, value, criteria, langs) {
@@ -140,6 +173,34 @@
 
                 return [isOn2, criteria2, langs2];
             },
+
+            question(tree)  {
+                if(tree.rule.feature.fieldType.min) {
+                    return `Do you want ${tree.rule.feature.description} for at least ${tree.rule.value}?`;
+                }
+                else {
+                    return `Do you want ${tree.rule.feature.description}?`
+                }
+            },
+
+            traverseTreeRight(tree, alreadyAnswered, langs) {
+                let answered2 = alreadyAnswered + `<li>${this.question(tree)} : YES </li>`
+                let tree2 = tree.right;
+                let question2 = this.question(tree2);
+                let langs2 = langs.filter(item => {
+                    return item.features.some( f => tree2.rule.feature.id == f.feature.id && tree2.rule.value <= f.value );
+                });
+
+                return [question2, answered2, tree2, langs2];
+            },
+
+            traverseTreeLeft(tree, alreadyAnswered) {
+                let answered2 = alreadyAnswered + `<li>${this.question(tree)} : NO </li>`
+                let tree2 = tree.left;
+                let question2 = this.question(tree2);
+
+                return [question2, answered2, tree2];
+            }
         };
 
         const featureDescription = (feature) => {
