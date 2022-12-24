@@ -14,7 +14,7 @@ class SplitterSorter {
 
     fun sort(languages: List<Language>, selector: Feature): List<Language> {
         val index = languages.getOrNull(0)?.features?.indexOfFirst { it.feature.id == selector.id } ?: -1
-        if(index == -1){
+        if (index == -1) {
             throw SplitterSorterException("Feature not found")
         }
 
@@ -52,19 +52,19 @@ class SplitterSorter {
         }
 
         val index = languages.getOrNull(0)?.features?.indexOfFirst { it.feature.id == selector.id } ?: -1
-        if(index == -1){
+        if (index == -1) {
             throw SplitterSorterException("Feature not found")
         }
 
         val map = languages.associate { it.name to it.features[index] }
 
-        for (split in min+1..max + 1) {
+        for (split in min + 1..max + 1) {
             val (lhs, rhs) = sorted.partition {
                 map[it.name]!!.value < split
             }
 
-            val distance = abs(languages.size/2 - lhs.size)
-            if(distance < splitDistance) {
+            val distance = abs(languages.size / 2 - lhs.size)
+            if (distance < splitDistance) {
                 splitVal = split
                 splitDistance = distance
                 left = lhs

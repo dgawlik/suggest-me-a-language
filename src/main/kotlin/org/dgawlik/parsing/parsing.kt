@@ -137,7 +137,7 @@ class Parser(val text: String) {
                     BinaryField()
                 else {
                     check("Field not numeric or binary", ::ParserException) { it[2] == "Numeric" }
-                    check("Bounds pattern not matching", ::ParserException) {  Regex("\\d+/\\d+").matches(it[3])}
+                    check("Bounds pattern not matching", ::ParserException) { Regex("\\d+/\\d+").matches(it[3]) }
                     val minMax = it[3].split("/")
                     NumericField(minMax[0].toInt(), minMax[1].toInt())
                 }

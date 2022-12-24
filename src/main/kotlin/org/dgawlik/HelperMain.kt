@@ -3,7 +3,6 @@ package org.dgawlik
 import org.dgawlik.domain.BinaryField
 import org.dgawlik.domain.NumericField
 import org.dgawlik.parsing.Parser
-import java.lang.RuntimeException
 import java.util.*
 
 
@@ -36,9 +35,9 @@ fun main(args: Array<String>) {
 
         print(prompt)
 
-        val answer =  Scanner(System.`in`).nextInt()
+        val answer = Scanner(System.`in`).nextInt()
 
-        if(answer < min || answer > max) {
+        if (answer < min || answer > max) {
             throw RuntimeException("Unexpected answer")
         }
 

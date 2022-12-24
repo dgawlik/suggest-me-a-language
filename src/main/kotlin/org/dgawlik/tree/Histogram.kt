@@ -36,9 +36,9 @@ class Histogram(selector: Feature, array: List<Language>) {
             0
         }
 
-        if(array.isNotEmpty()){
+        if (array.isNotEmpty()) {
             val index = array[0].features.indexOfFirst { it.feature.id == selector.id }
-            if(index == -1){
+            if (index == -1) {
                 throw HistogramException("Feature not found")
             }
             val filtered = array.map { it.features[index] }
@@ -65,13 +65,13 @@ class Histogram(selector: Feature, array: List<Language>) {
 
     fun entropyGiven(parent: Histogram): Double {
         var sum = 0.0
-        for( (index, value) in counts.withIndex() ) {
-            val pA = total.toDouble()/parent.total.toDouble()
+        for ((index, value) in counts.withIndex()) {
+            val pA = total.toDouble() / parent.total.toDouble()
             val pB = parent.counts[index].toDouble() / parent.total.toDouble()
             val pBA = (value.toDouble()) / total.toDouble()
 
             if (pA > 0 && pBA > 0 && pB > 0) {
-                sum -= (pA*pBA/pB) * log(pA*pBA/pB, counts.size.toDouble())
+                sum -= (pA * pBA / pB) * log(pA * pBA / pB, counts.size.toDouble())
             }
         }
         return sum

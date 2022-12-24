@@ -43,9 +43,9 @@ class Id3Tree(array: Array<Language>, features: Array<Feature>) {
 
                 val newCandidates = candidateFeatures.filter { it.id != bestRule!!.feature.id }
 
-               if(newCandidates.size < 34){
-                   continue
-               }
+                if (newCandidates.size < 34) {
+                    continue
+                }
 
                 val leftChild = TreeNode(node, null, null, null)
                 val rightChild = TreeNode(node, null, null, null)
