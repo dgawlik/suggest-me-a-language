@@ -54,4 +54,22 @@ internal class HistogramTest {
 
         assertTrue { hist.entropy() <= 1.0 }
     }
+
+    @Test
+    @DisplayName("should calculate conditional entropy")
+    fun conditional_entropy(){
+        val array = arrayOf(
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f2, 1))),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f2, 1))),
+            Language("L3", "lang 3", arrayOf(FeatureRealization(f2, 2))),
+            Language("L4", "lang 4", arrayOf(FeatureRealization(f2, 2)))
+        )
+        val parentHist = Histogram(f2, array)
+
+        val childArray = array.copyOfRange(0, 2)
+
+        val childHist = Histogram(f2, childArray)
+
+        assertEquals(0.0, childHist.conditionalEntropy(parentHist))
+    }
 }

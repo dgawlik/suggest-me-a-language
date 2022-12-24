@@ -55,4 +55,18 @@ class Histogram(selector: Feature, array: Array<Language>) {
         }
         return sum
     }
+
+    fun conditionalEntropy(parent: Histogram): Double {
+        var sum = 0.0
+        for( (index, value) in counts.withIndex() ) {
+            val pBA = total.toDouble()/parent.total.toDouble()
+            val pB = parent.counts[index].toDouble() / parent.total.toDouble()
+            val pA = (value.toDouble()) / total.toDouble()
+
+            if (pA > 0 && pB > 0) {
+                sum -= (pA*pBA/pB) * log(pA*pBA/pB, counts.size.toDouble())
+            }
+        }
+        return sum
+    }
 }

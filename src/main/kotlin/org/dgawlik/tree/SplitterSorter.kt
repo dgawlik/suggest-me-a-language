@@ -21,6 +21,7 @@ class SplitterSorter {
 
     fun bestSplit(languages: Array<Language>, selector: Feature): Quad<Array<Language>, Array<Language>, Double, Int> {
         val sorted = sort(languages, selector)
+        val sortedHist = Histogram(selector, sorted)
 
         var left: Array<Language> = arrayOf()
         var right: Array<Language> = arrayOf()
@@ -46,7 +47,8 @@ class SplitterSorter {
             }
 
             val thisEntropy =
-                Histogram(selector, lhs.toTypedArray()).entropy() + Histogram(selector, rhs.toTypedArray()).entropy()
+                Histogram(selector, lhs.toTypedArray()).conditionalEntropy(sortedHist) +
+                        Histogram(selector, rhs.toTypedArray()).conditionalEntropy(sortedHist)
 
             if (thisEntropy < minEntropy) {
                 minEntropy = thisEntropy
