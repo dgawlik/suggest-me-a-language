@@ -9,7 +9,7 @@ import kotlin.math.log
 
 class HistogramException(msg: String) : RuntimeException(msg)
 
-class Histogram(selector: Feature, array: Array<Language>) {
+class Histogram(selector: Feature, array: List<Language>) {
 
     var counts: Array<Int> = arrayOf()
     var total: Int

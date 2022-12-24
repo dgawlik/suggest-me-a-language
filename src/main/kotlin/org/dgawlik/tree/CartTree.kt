@@ -14,16 +14,16 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
         fun buildTree(array: Array<Language>, features: Array<Feature>): TreeNode {
 
             val root = TreeNode(null, null, null, null)
-            val queue = ArrayDeque<TreeNode>()
+            val queue = ArrayDeque<Pair<TreeNode, List<Feature>>>()
             val spSor = SplitterSorter()
-            var candidateFeatures = features.copyOf()
-            queue.addLast(root)
+            var feats = features.copyOf().toList()
+            queue.addLast(Pair(root, feats))
 
-            while (queue.isNotEmpty() && candidateFeatures.isNotEmpty()) {
-                val node = queue.removeFirst();
-                val workArray = array.filter { compositeCriteria(node)(it) }.toTypedArray()
+            while (queue.isNotEmpty()) {
+                val (node, candidateFeatures) = queue.removeFirst();
+                val workArray = array.filter { compositeCriteria(node)(it) }
 
-                if (workArray.isEmpty()) {
+                if (workArray.isEmpty() || candidateFeatures.isEmpty()) {
                     continue
                 }
 
@@ -41,7 +41,9 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
                     }
                 }
 
-                candidateFeatures = candidateFeatures.filter { it.id != bestRule!!.feature.id }.toTypedArray()
+                val newCandidates = candidateFeatures.filter { it.id != bestRule!!.feature.id }
+
+                println(bestRule!!.feature.description)
 
                 val leftChild = TreeNode(node, null, null, null)
                 val rightChild = TreeNode(node, null, null, null)
@@ -50,8 +52,8 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
                 node.right = rightChild
                 node.rule = bestRule
 
-                queue.addLast(leftChild)
-                queue.addLast(rightChild)
+                queue.addLast(Pair(leftChild, newCandidates))
+                queue.addLast(Pair(rightChild, newCandidates))
             }
 
             return root
@@ -84,7 +86,7 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
             }
         }
 
-        fun totalEntropy(langs: Array<Language>, features: Array<Feature>): Double {
+        fun totalEntropy(langs: List<Language>, features: List<Feature>): Double {
             var sum = 0.0
             for (ft in features) {
                 sum += Histogram(ft, langs).entropy()

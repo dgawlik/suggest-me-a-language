@@ -4,18 +4,19 @@ import org.dgawlik.domain.BinaryField
 import org.dgawlik.domain.Feature
 import org.dgawlik.domain.FeatureRealization
 import org.dgawlik.domain.Language
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-internal class SplitterSorterTest{
+internal class SplitterSorterTest {
 
     val f1 = Feature("LANG1", "first feature", BinaryField())
 
     @Test
     @DisplayName("Should sort correctly")
-    fun should_sort(){
-        val array = arrayOf(
+    fun should_sort() {
+        val array = arrayListOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1))),
             Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0)))
         )
@@ -28,8 +29,8 @@ internal class SplitterSorterTest{
 
     @Test
     @DisplayName("Should find best split")
-    fun best_split(){
-        val array = arrayOf(
+    fun best_split() {
+        val array = arrayListOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 0))),
             Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0))),
             Language("L3", "lang 3", arrayOf(FeatureRealization(f1, 0))),
@@ -46,8 +47,8 @@ internal class SplitterSorterTest{
 
     @Test
     @DisplayName("Should find best split in corner case")
-    fun best_split_corner_case(){
-        val array = arrayOf(
+    fun best_split_corner_case() {
+        val array = arrayListOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 0))),
             Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0))),
         )

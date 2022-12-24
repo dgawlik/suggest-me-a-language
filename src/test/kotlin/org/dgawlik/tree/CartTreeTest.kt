@@ -17,12 +17,12 @@ internal class CartTreeTest{
     @Test
     @DisplayName("should calculate total entropy")
     fun total_entropy(){
-        val array = arrayOf(
+        val array = arrayListOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1), FeatureRealization(f2, 0))),
             Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0), FeatureRealization(f2, 1)))
         )
 
-        val result = CartTree.totalEntropy(array, arrayOf(f1, f2))
+        val result = CartTree.totalEntropy(array, arrayListOf(f1, f2))
 
         assertEquals(2.0, result)
     }

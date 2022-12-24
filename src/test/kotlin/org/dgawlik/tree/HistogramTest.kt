@@ -16,7 +16,7 @@ internal class HistogramTest {
     fun zero_entropy() {
 
 
-        val array = arrayOf(
+        val array = arrayListOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1))),
             Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 1)))
         )
@@ -31,7 +31,7 @@ internal class HistogramTest {
     fun maximum_entropy() {
 
 
-        val array = arrayOf(
+        val array = arrayListOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1))),
             Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0)))
         )
@@ -43,7 +43,7 @@ internal class HistogramTest {
     @Test
     @DisplayName("should not exceed 1 for maximum entropy")
     fun numeric_maximum_entropy() {
-        val array = arrayOf(
+        val array = arrayListOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f2, 1))),
             Language("L2", "lang 2", arrayOf(FeatureRealization(f2, 2))),
             Language("L3", "lang 3", arrayOf(FeatureRealization(f2, 3))),
@@ -57,7 +57,7 @@ internal class HistogramTest {
     @Test
     @DisplayName("should calculate conditional entropy")
     fun conditional_entropy(){
-        val array = arrayOf(
+        val array = arrayListOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f2, 1))),
             Language("L2", "lang 2", arrayOf(FeatureRealization(f2, 1))),
             Language("L3", "lang 3", arrayOf(FeatureRealization(f2, 2))),
@@ -65,7 +65,7 @@ internal class HistogramTest {
         )
         val parentHist = Histogram(f2, array)
 
-        val childArray = array.copyOfRange(0, 2)
+        val childArray = array.subList(0, 2)
 
         val childHist = Histogram(f2, childArray)
 
