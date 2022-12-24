@@ -34,7 +34,7 @@
                             <ul>
                                 <template x-for="feature in language.features" >
                                     <template x-if="feature.value > 0">
-                                        <li x-text="featureDescription(feature)"></li>
+                                        <li x-html="featureDescription(feature)"></li>
                                     </template>
                                 </template>
                             </ul>
@@ -69,7 +69,7 @@
                                 <ul>
                                     <template x-for="feature in language.features" >
                                         <template x-if="feature.value > 0">
-                                            <li x-text="featureDescription(feature)"></li>
+                                            <li x-html="featureDescription(feature)"></li>
                                         </template>
                                     </template>
                                 </ul>
@@ -101,7 +101,7 @@
                                 <ul>
                                     <template x-for="feature in language.features" >
                                         <template x-if="feature.value > 0">
-                                            <li x-text="featureDescription(feature)"></li>
+                                            <li x-html="featureDescription(feature)"></li>
                                         </template>
                                     </template>
                                 </ul>
@@ -205,7 +205,7 @@
 
         const featureDescription = (feature) => {
             if (feature.feature.fieldType.min) {
-                return `${feature.feature.description} [${feature.feature.fieldType.min}/${feature.feature.fieldType.max}] = ${feature.value}`
+                return `<span">${feature.feature.description} <progress style="display: inline-block; width: 200px; margin-top: auto; margin-bottom: auto;" value="${feature.value}" max="${feature.feature.fieldType.max}"></progress><span>`
             }
             else {
                 return feature.feature.description
