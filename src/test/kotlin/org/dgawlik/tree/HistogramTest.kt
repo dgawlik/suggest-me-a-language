@@ -1,17 +1,16 @@
 package org.dgawlik.tree
 
-import org.dgawlik.domain.BinaryField
-import org.dgawlik.domain.Feature
-import org.dgawlik.domain.FeatureRealization
-import org.dgawlik.domain.Language
+import org.dgawlik.domain.*
 import org.dgawlik.parsing.Parser
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import kotlin.test.assertTrue
 
 internal class HistogramTest {
 
     val f1 = Feature("LANG1", "first feature", BinaryField())
+    val f2 = Feature("LANG2", "second feature", NumericField(1, 4))
 
     @Test
     @DisplayName("Uniform array should have 0 entropy")
@@ -43,13 +42,16 @@ internal class HistogramTest {
     }
 
     @Test
-    @DisplayName("x")
-    fun x() {
-        val db = BinaryField::class.java.getResource("/Database.md")!!.readText()
-        val parser = Parser(db)
-        parser.parse()
+    @DisplayName("should not exceed 1 for maximum entropy")
+    fun numeric_maximum_entropy() {
+        val array = arrayOf(
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f2, 1))),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f2, 2))),
+            Language("L3", "lang 3", arrayOf(FeatureRealization(f2, 3))),
+            Language("L4", "lang 4", arrayOf(FeatureRealization(f2, 4)))
+        )
+        val hist = Histogram(f2, array)
 
-        val hist = Histogram(parser.features[0], parser.languages)
-        hist.entropy()
+        assertTrue { hist.entropy() <= 1.0 }
     }
 }
