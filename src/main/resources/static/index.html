@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" />
 </head>
 <body>
     <main x-data="state" class="container">
@@ -87,8 +88,8 @@
 
                 </ul>
                 <p x-text="currentQuestion"></p>
-                <a  href="#" role="button" x-on:click="[currentQuestion, alreadyAnswered, tree] = traverseTreeLeft(tree, alreadyAnswered);">No</a>
-                <a  href="#" role="button" x-on:click="[currentQuestion, alreadyAnswered, tree, treeFilteredLanguages] = traverseTreeRight(tree, alreadyAnswered, treeFilteredLanguages);">Yes</a>
+                <a  href="#" role="button" x-on:click="[currentQuestion, alreadyAnswered, tree] = traverseTreeLeft(tree, alreadyAnswered);"><span style="vertical-align: middle" class="material-symbols-outlined">close</span>&nbsp; &nbsp; No</a>
+                <a  href="#" role="button" x-on:click="[currentQuestion, alreadyAnswered, tree, treeFilteredLanguages] = traverseTreeRight(tree, alreadyAnswered, treeFilteredLanguages);"><span style="vertical-align: middle" class="material-symbols-outlined">check</span>&nbsp; &nbsp; Yes</a>
             </div>
             <div >
                 <h3>Languages</h3>
