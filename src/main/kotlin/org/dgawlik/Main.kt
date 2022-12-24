@@ -4,6 +4,8 @@ import org.dgawlik.domain.BinaryField
 import org.dgawlik.domain.Feature
 import org.dgawlik.domain.Language
 import org.dgawlik.parsing.Parser
+import org.dgawlik.tree.CartTree
+import org.dgawlik.tree.TreeNode
 import org.http4k.core.Body
 import org.http4k.core.Method
 import org.http4k.core.Response
@@ -60,8 +62,11 @@ fun main() {
     val parser = Parser(db)
     parser.parse()
 
+    val cart = CartTree(parser.languages, parser.features)
+
     val languageLens = Body.auto<Array<Language>>().toLens()
     val featureLens = Body.auto<Array<Feature>>().toLens()
+    val treeLens = Body.auto<TreeNode>().toLens()
 
     routes(
         "/languages" bind Method.GET to {
@@ -69,6 +74,9 @@ fun main() {
         },
         "/features" bind Method.GET to {
             Response(OK).with(featureLens of parser.features)
+        },
+        "/tree" bind Method.GET to {
+            Response(OK).with(treeLens of cart.root)
         },
         "/" bind Method.GET to {
             Response(OK).header("Content-Type", "text/html;charset=UTF-8").body(index)

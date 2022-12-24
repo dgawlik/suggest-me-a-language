@@ -23,10 +23,14 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
                 val node = queue.removeFirst();
                 val workArray = array.filter { compositeCriteria(node)(it) }.toTypedArray()
 
+                if(workArray.isEmpty()){
+                    continue
+                }
+
                 var minEntropy = Double.MAX_VALUE
                 var bestRule: FeatureRealization? = null
                 for (candidate in candidateFeatures) {
-                    val (lhs, rhs, _, splitVal) = spSor.bestSplit(workArray, candidate)
+                    val (lhs, rhs, splitVal) = spSor.bestSplit(workArray, candidate)
 
                     val lhsScore = totalEntropy(lhs, candidateFeatures)
                     val rhsScore = totalEntropy(rhs, candidateFeatures)

@@ -4,11 +4,11 @@ import org.dgawlik.domain.BinaryField
 import org.dgawlik.domain.Feature
 import org.dgawlik.domain.Language
 import org.dgawlik.domain.NumericField
+import kotlin.math.abs
 
 
 class SplitterSorterException(msg: String) : RuntimeException(msg)
 
-data class Quad<T1, T2, T3, T4>(val t1: T1, val t2: T2, val t3: T3, val t4: T4)
 
 class SplitterSorter {
 
@@ -19,25 +19,31 @@ class SplitterSorter {
         }.toTypedArray()
     }
 
-    fun bestSplit(languages: Array<Language>, selector: Feature): Quad<Array<Language>, Array<Language>, Double, Int> {
+    fun bestSplit(languages: Array<Language>, selector: Feature): Triple<Array<Language>, Array<Language>, Int> {
         val sorted = sort(languages, selector)
         val sortedHist = Histogram(selector, sorted)
 
         var left: Array<Language> = arrayOf()
         var right: Array<Language> = arrayOf()
-        var minEntropy = Double.MAX_VALUE
         var splitVal = -1
+        var splitDistance = languages.size
 
         val min: Int
         val max: Int
-        if (selector.fieldType is BinaryField) {
-            min = 0
-            max = 1
-        } else if (selector.fieldType is NumericField) {
-            min = selector.fieldType.min
-            max = selector.fieldType.max
-        } else {
-            throw SplitterSorterException("Unknown field type")
+        when (selector.fieldType) {
+            is BinaryField -> {
+                min = 0
+                max = 1
+            }
+
+            is NumericField -> {
+                min = selector.fieldType.min
+                max = selector.fieldType.max
+            }
+
+            else -> {
+                throw SplitterSorterException("Unknown field type")
+            }
         }
 
         for (split in min+1..max + 1) {
@@ -46,18 +52,16 @@ class SplitterSorter {
                 value < split
             }
 
-            val thisEntropy =
-                Histogram(selector, lhs.toTypedArray()).entropyGiven(sortedHist) +
-                        Histogram(selector, rhs.toTypedArray()).entropyGiven(sortedHist)
-
-            if (thisEntropy < minEntropy) {
-                minEntropy = thisEntropy
+            val distance = abs(languages.size/2 - lhs.size)
+            if(distance < splitDistance) {
+                splitVal = split
+                splitDistance = distance
                 left = lhs.toTypedArray()
                 right = rhs.toTypedArray()
-                splitVal = split
             }
+
         }
 
-        return Quad(left, right, minEntropy, splitVal)
+        return Triple(left, right, splitVal)
     }
 }
