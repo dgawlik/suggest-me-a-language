@@ -8,6 +8,7 @@ import org.dgawlik.parsing.Parser
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import kotlin.test.Ignore
 
 internal class CartTreeTest{
 
@@ -29,6 +30,7 @@ internal class CartTreeTest{
 
     @Test
     @DisplayName("should create valid composite criteria")
+    @Ignore
     fun composite_criteria(){
         val array = arrayOf(
             Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1), FeatureRealization(f2, 0))),

@@ -36,9 +36,17 @@ class Histogram(selector: Feature, array: List<Language>) {
             0
         }
 
-        array.forEach {
-            val fr = it.features.find { it.feature.id == selector.id }?.value ?: throw HistogramException("Feature not found")
-            counts[fr - min]++
+        if(array.isNotEmpty()){
+            val index = array[0].features.indexOfFirst { it.feature.id == selector.id }
+            if(index == -1){
+                throw HistogramException("Feature not found")
+            }
+            val filtered = array.map { it.features[index] }
+
+            filtered.forEach {
+                val fr = it.value
+                counts[fr - min]++
+            }
         }
 
         total = counts.sum()

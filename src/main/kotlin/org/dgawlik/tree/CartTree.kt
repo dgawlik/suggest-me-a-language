@@ -43,7 +43,9 @@ class CartTree(array: Array<Language>, features: Array<Feature>) {
 
                 val newCandidates = candidateFeatures.filter { it.id != bestRule!!.feature.id }
 
-                println(bestRule!!.feature.description)
+               if(newCandidates.size < 34){
+                   continue
+               }
 
                 val leftChild = TreeNode(node, null, null, null)
                 val rightChild = TreeNode(node, null, null, null)
