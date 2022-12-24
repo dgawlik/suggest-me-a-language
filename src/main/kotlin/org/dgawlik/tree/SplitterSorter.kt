@@ -12,19 +12,18 @@ class SplitterSorterException(msg: String) : RuntimeException(msg)
 
 class SplitterSorter {
 
-    fun sort(languages: Array<Language>, selector: Feature): Array<Language> {
+    fun sort(languages: List<Language>, selector: Feature): List<Language> {
         return languages.sortedBy {
             val value = it.features.find { it2 -> it2.feature.id == selector.id }?.value ?: 0
             value
-        }.toTypedArray()
+        }
     }
 
-    fun bestSplit(languages: Array<Language>, selector: Feature): Triple<Array<Language>, Array<Language>, Int> {
+    fun bestSplit(languages: List<Language>, selector: Feature): Triple<List<Language>, List<Language>, Int> {
         val sorted = sort(languages, selector)
-        val sortedHist = Histogram(selector, sorted)
 
-        var left: Array<Language> = arrayOf()
-        var right: Array<Language> = arrayOf()
+        var left: List<Language> = arrayListOf()
+        var right: List<Language> = arrayListOf()
         var splitVal = -1
         var splitDistance = languages.size
 
@@ -56,8 +55,8 @@ class SplitterSorter {
             if(distance < splitDistance) {
                 splitVal = split
                 splitDistance = distance
-                left = lhs.toTypedArray()
-                right = rhs.toTypedArray()
+                left = lhs
+                right = rhs
             }
 
         }
