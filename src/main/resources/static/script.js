@@ -67,16 +67,17 @@
 
     traverseTreeRight() {
         this.alreadyAnswered += `<li>${this.question()} : YES </li>`;
+        let prevTree = this.tree;
         this.tree = this.tree.right;
         this.currentQuestion = this.question();
         this.treeFilteredLanguages = this.treeFilteredLanguages.filter(item => {
-            return item.features.some( f => this.tree.rule.feature.id == f.feature.id && this.tree.rule.value <= f.value );
+            return item.features.some( f => prevTree.rule.feature.id == f.feature.id && prevTree.rule.value <= f.value );
         });
     },
 
     traverseTreeLeft(tree, alreadyAnswered) {
-        this.alreadyAnswered += `<li>${this.question()} : YES </li>`;
-        this.tree = this.tree.right;
+        this.alreadyAnswered += `<li>${this.question()} : NO </li>`;
+        this.tree = this.tree.left;
         this.currentQuestion = this.question();
     }
 };
