@@ -41,14 +41,13 @@
     },
 
     updateLanguages(isOn, feature, value) {
-        let criteria2 = null;
         if(!isOn) {
             this.criteria =  this.criteria.concat([{value: feature.fieldType.min ? value : 1, feature}]);
         }
         else {
             this.criteria = this.criteria.filter(item => item.feature.id !== feature.id)
         }
-        this.filteredLanguages = this.filteredLanguages.filter(item => {
+        this.filteredLanguages = this.languages.filter(item => {
             return this.criteria.every( c => {
                  return item.features.some( f => c.feature.id == f.feature.id && c.value <= f.value );
             });
