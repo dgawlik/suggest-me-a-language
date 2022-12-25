@@ -88,12 +88,8 @@ class Id3Tree(array: Array<Language>, features: Array<Feature>) {
             }
         }
 
-        fun totalEntropy(langs: List<Language>, features: List<Feature>): Double {
-            var sum = 0.0
-            for (ft in features) {
-                sum += Histogram(ft, langs).entropy()
-            }
-            return sum
+        fun totalEntropy(languages: List<Language>, features: List<Feature>): Double {
+            return features.sumOf { Histogram(it, languages).entropy() }
         }
     }
 }
