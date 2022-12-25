@@ -12,17 +12,10 @@
     <main x-data="state" class="container">
         <h1 style="font-family: 'Lobster'; font-size: 56px;"> Suggest me <br> a language</h1>
 
-        <div style="display:inline-block; width:200px;">
-            <details role="list">
-                <summary aria-haspopup="listbox" role="button">
-                    I ...
-                </summary>
-                <ul role="listbox">
-                    <li x-on:click="showBrowse = true; showFillCriteria = false; showTree = false;"><a>want to browse</a></li>
-                    <li x-on:click="showBrowse = false; showFillCriteria = true; showTree = false;"><a>know the criteria</a></li>
-                    <li x-on:click="showBrowse = false; showFillCriteria = false; showTree = true;"><a>need guidance</a></li>
-                </ul>
-            </details>
+        <div style="margin-bottom: 40px;">
+            <a href="#" style="border-radius: 0px;" x-on:click="showBrowse = true; showFillCriteria = false; showTree = false;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">search</span>&nbsp;I want to browse</a>&nbsp;
+            <a href="#" style="border-radius: 0px;" x-on:click="showBrowse = false; showFillCriteria = true; showTree = false;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">check_box</span>&nbsp;I know the criteria</a>&nbsp;
+            <a href="#" style="border-radius: 0px;" x-on:click="showBrowse = false; showFillCriteria = false; showTree = true;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">person</span>&nbsp;I need guidance</a>
         </div>
 
         <div id="browse" x-show="showBrowse">
