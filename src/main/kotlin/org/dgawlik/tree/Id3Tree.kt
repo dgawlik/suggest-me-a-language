@@ -15,8 +15,8 @@ class Id3Tree(array: Array<Language>, features: Array<Feature>) {
 
             val root = TreeNode(null, null, null, null)
             val queue = ArrayDeque<Pair<TreeNode, List<Feature>>>()
-            val spSor = SplitterSorter()
-            var feats = features.copyOf().toList()
+            val splitterSorter = SplitterSorter()
+            val feats = features.copyOf().toList()
             queue.addLast(Pair(root, feats))
 
             while (queue.isNotEmpty()) {
@@ -30,7 +30,7 @@ class Id3Tree(array: Array<Language>, features: Array<Feature>) {
                 var minEntropy = Double.MAX_VALUE
                 var bestRule: FeatureRealization? = null
                 for (candidate in candidateFeatures) {
-                    val (lhs, rhs, splitVal) = spSor.bestSplit(workArray, candidate)
+                    val (lhs, rhs, splitVal) = splitterSorter.bestSplit(workArray, candidate)
 
                     val lhsScore = totalEntropy(lhs, candidateFeatures)
                     val rhsScore = totalEntropy(rhs, candidateFeatures)
