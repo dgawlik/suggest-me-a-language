@@ -1,0 +1,92 @@
+ const state = {
+    languages: [],
+    features: [],
+
+    filteredLanguages: [],
+    treeFilteredLanguages: [],
+
+    criteria: [],
+
+    showBrowse: false,
+    showFillCriteria: false,
+    showTree: false,
+
+    tree: null,
+    alreadyAnswered: "",
+    currentQuestion: "",
+
+    init() {
+        this.get()
+    },
+
+    async get() {
+        let r = await fetch('/languages')
+        r = await r.json()
+
+        this.languages = r
+        this.filteredLanguages = r
+        this.treeFilteredLanguages = r
+
+        let f = await fetch('/features')
+        f = await f.json()
+
+        this.features = f;
+        this.criteria = [];
+
+        let t = await fetch('/tree')
+        t = await t.json()
+
+        this.tree = t
+        this.currentQuestion = this.question();
+    },
+
+    updateLanguages(isOn, feature, value) {
+        let criteria2 = null;
+        if(!isOn) {
+            this.criteria =  this.criteria.concat([{value: feature.fieldType.min ? value : 1, feature}]);
+        }
+        else {
+            this.criteria = this.criteria.filter(item => item.feature.id !== feature.id)
+        }
+        this.filteredLanguages = this.filteredLanguages.filter(item => {
+            return this.criteria.every( c => {
+                 return item.features.some( f => c.feature.id == f.feature.id && c.value <= f.value );
+            });
+        });
+
+        return !isOn;
+    },
+
+    question()  {
+        if(this.tree.rule.feature.fieldType.min) {
+            return `Do you want ${this.tree.rule.feature.description} for at least ${this.tree.rule.value}?`;
+        }
+        else {
+            return `Do you want ${this.tree.rule.feature.description}?`
+        }
+    },
+
+    traverseTreeRight() {
+        this.alreadyAnswered += `<li>${this.question()} : YES </li>`;
+        this.tree = this.tree.right;
+        this.currentQuestion = this.question();
+        this.treeFilteredLanguages = this.treeFilteredLanguages.filter(item => {
+            return item.features.some( f => this.tree.rule.feature.id == f.feature.id && this.tree.rule.value <= f.value );
+        });
+    },
+
+    traverseTreeLeft(tree, alreadyAnswered) {
+        this.alreadyAnswered += `<li>${this.question()} : YES </li>`;
+        this.tree = this.tree.right;
+        this.currentQuestion = this.question();
+    }
+};
+
+const featureDescription = (feature) => {
+    if (feature.feature.fieldType.min) {
+        return `<span">${feature.feature.description} <progress style="display: inline-block; width: 200px; margin-top: auto; margin-bottom: auto;" value="${feature.value}" max="${feature.feature.fieldType.max}"></progress><span>`
+    }
+    else {
+        return feature.feature.description
+    }
+};

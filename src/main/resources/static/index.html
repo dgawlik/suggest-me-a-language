@@ -50,7 +50,7 @@
                 <h3>Fill in criteria</h3>
                 <template x-for="feature in features" :key="feature.id">
                     <label x-data="{active: false, value: ''}">
-                        <input x-on:click="[active, criteria, filteredLanguages] = updateLanguages(active, feature, value, criteria, languages);"
+                        <input x-on:click="active = updateLanguages(active, feature, value);"
                                type="checkbox" name="switch" role="switch">
                         <span x-text="feature.description"></span>
                         <template x-if="feature.fieldType.min">
@@ -88,8 +88,8 @@
 
                 </ul>
                 <p x-text="currentQuestion"></p>
-                <a  href="#" role="button" x-on:click="[currentQuestion, alreadyAnswered, tree] = traverseTreeLeft(tree, alreadyAnswered);"><span style="vertical-align: middle" class="material-symbols-outlined">close</span>&nbsp; &nbsp; No</a>
-                <a  href="#" role="button" x-on:click="[currentQuestion, alreadyAnswered, tree, treeFilteredLanguages] = traverseTreeRight(tree, alreadyAnswered, treeFilteredLanguages);"><span style="vertical-align: middle" class="material-symbols-outlined">check</span>&nbsp; &nbsp; Yes</a>
+                <a  href="#" role="button" x-on:click="traverseTreeLeft();"><span style="vertical-align: middle" class="material-symbols-outlined">close</span>&nbsp; &nbsp; No</a>
+                <a  href="#" role="button" x-on:click="traverseTreeRight();"><span style="vertical-align: middle" class="material-symbols-outlined">check</span>&nbsp; &nbsp; Yes</a>
             </div>
             <div >
                 <h3>Languages</h3>
@@ -116,104 +116,6 @@
 
     </main>
 
-    <script type="application/javascript">
-        const state = {
-            languages: [],
-            features: [],
-            showBrowse: false,
-            showFillCriteria: false,
-            showTree: false,
-            criteria: [],
-            filteredLanguages: [],
-            treeFilteredLanguages: [],
-            treeCriteria: [],
-            tree: null,
-            alreadyAnswered: "",
-            currentQuestion: "",
-
-            init() {
-                this.get()
-            },
-
-            async get() {
-                let r = await fetch('/languages')
-                r = await r.json()
-
-                this.languages = r
-                this.filteredLanguages = r
-                this.treeFilteredLanguages = r
-
-                let f = await fetch('/features')
-                f = await f.json()
-
-                this.features = f;
-                this.criteria = [];
-
-                let t = await fetch('/tree')
-                t = await t.json()
-
-                this.tree = t
-                this.currentQuestion = this.question(this.tree);
-            },
-
-            updateLanguages(isOn, feature, value, criteria, langs) {
-                let isOn2 = !isOn;
-
-                let criteria2 = null;
-                if(isOn2) {
-                    criteria2 =  criteria.concat([{value: feature.fieldType.min ? value : 1, feature}]);
-                }
-                else {
-                    criteria2 = criteria.filter(item => item.feature.id !== feature.id)
-                }
-                let langs2 = langs.filter(item => {
-                    return criteria2.every( c => {
-                         return item.features.some( f => c.feature.id == f.feature.id && c.value <= f.value );
-                    });
-                });
-
-                return [isOn2, criteria2, langs2];
-            },
-
-            question(tree)  {
-                if(tree.rule.feature.fieldType.min) {
-                    return `Do you want ${tree.rule.feature.description} for at least ${tree.rule.value}?`;
-                }
-                else {
-                    return `Do you want ${tree.rule.feature.description}?`
-                }
-            },
-
-            traverseTreeRight(tree, alreadyAnswered, langs) {
-                let answered2 = alreadyAnswered + `<li>${this.question(tree)} : YES </li>`
-                let tree2 = tree.right;
-                let question2 = this.question(tree2);
-                let langs2 = langs.filter(item => {
-                    return item.features.some( f => tree.rule.feature.id == f.feature.id && tree.rule.value <= f.value );
-                });
-
-                return [question2, answered2, tree2, langs2];
-            },
-
-            traverseTreeLeft(tree, alreadyAnswered) {
-                let answered2 = alreadyAnswered + `<li>${this.question(tree)} : NO </li>`
-                let tree2 = tree.left;
-                let question2 = this.question(tree2);
-
-                return [question2, answered2, tree2];
-            }
-        };
-
-        const featureDescription = (feature) => {
-            if (feature.feature.fieldType.min) {
-                return `<span">${feature.feature.description} <progress style="display: inline-block; width: 200px; margin-top: auto; margin-bottom: auto;" value="${feature.value}" max="${feature.feature.fieldType.max}"></progress><span>`
-            }
-            else {
-                return feature.feature.description
-            }
-        };
-
-
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>

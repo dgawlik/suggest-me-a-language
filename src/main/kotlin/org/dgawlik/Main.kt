@@ -56,6 +56,7 @@ fun main() {
 
     val db = BinaryField::class.java.getResource("/Database.md")!!.readText()
     val index = BinaryField::class.java.getResource("/static/index.html")!!.readText()
+    val script = BinaryField::class.java.getResource("/static/script.js")!!.readText()
 
     val parser = Parser(db)
     parser.parse()
@@ -78,6 +79,9 @@ fun main() {
         },
         "/" bind Method.GET to {
             Response(OK).header("Content-Type", "text/html;charset=UTF-8").body(index)
+        },
+        "/script.js" bind Method.GET to {
+            Response(OK).header("Content-Type", "application/javascript").body(script)
         }
     ).asServer(SunHttp(port)).start()
 
