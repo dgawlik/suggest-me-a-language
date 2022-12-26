@@ -84,4 +84,15 @@ internal class DatabaseTest {
 
         assert(containsExactly(parser.languages, feature, validLanguages))
     }
+
+    @Test
+    fun all_valid_languages_for_functional_programming(){
+        val feature = parser.features.find { it.id == "LANG7" }!!
+
+        val validLanguages = setOf("Python", "C++", "Java", "C#", "JavaScript", "PHP", "Go", "Swift", "Ruby",
+            "Rust", "Kotlin", "Lisp", "Scala", "Haskell", "F#", "Scheme", "Erlang", "Groovy", "Elixir",
+            "Elm", "Haxe", "Clojure", "Crystal", "PureScript", "TypeScript", "Smalltalk")
+
+        assert(containsExactly(parser.languages, feature, validLanguages))
+    }
 }
