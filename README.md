@@ -40,9 +40,8 @@ presented when card is clicked.
 #### Filter
 
 At the top there is list of criterias. Turning them on causes the list
-to filter with only matching. Important to note is behaviour of numeric
-inputs - you have to fill in the number first then activate the feature.
-If you want to modify that number turn off and on that particular feature.
+to filter with only matching. With features on scale you can change
+input's value while it's on and list will reflect the criterium.
 There is no validation, if the number is not valid the behavior is undefined.
 
 #### Interactive

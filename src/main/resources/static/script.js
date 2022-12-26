@@ -40,6 +40,19 @@
         this.currentQuestion = this.question();
     },
 
+    updateInput(isOn, feature, value) {
+        if(isOn) {
+            this.criteria = this.criteria.filter(item => item.feature.id !== feature.id)
+            this.criteria =  this.criteria.concat([{value: feature.fieldType.min ? value : 1, feature}]);
+
+            this.filteredLanguages = this.languages.filter(item => {
+                return this.criteria.every( c => {
+                     return item.features.some( f => c.feature.id == f.feature.id && c.value <= f.value );
+                });
+            });
+        }
+    },
+
     updateLanguages(isOn, feature, value) {
         if(!isOn) {
             this.criteria =  this.criteria.concat([{value: feature.fieldType.min ? value : 1, feature}]);

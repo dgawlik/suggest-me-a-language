@@ -2232,7 +2232,7 @@
 | LANG11   | Formal verification      | Binary  | -       |
 | LANG12   | Pattern matching         | Binary  | -       |
 | LANG13   | Object Oriented Paradigm | Binary  | -       |
-| LANG14   | Green Threads            | Binary  | -       |
+| LANG14   | Fibers/Coroutines        | Binary  | -       |
 | LANG15   | Generics                 | Binary  | -       |
 | LANG16   | Exceptions               | Binary  | -       |
 | LANG17   | Conciseness              | Numeric | 1/10    |

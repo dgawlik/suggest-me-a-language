@@ -46,7 +46,7 @@
                                type="checkbox" name="switch" role="switch">
                         <span x-text="feature.description"></span>
                         <template x-if="feature.fieldType.min">
-                            <input style="display: inline-block; width: 150px;" type="text" placeholder="at least" x-model="value">
+                            <input x-on:input="updateInput(active, feature, value);" style="display: inline-block; width: 150px;" type="text" placeholder="at least" x-model="value">
                         </template>
                     </label>
                 </template>
