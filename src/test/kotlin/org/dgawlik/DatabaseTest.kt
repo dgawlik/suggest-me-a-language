@@ -64,4 +64,14 @@ internal class DatabaseTest {
 
         assert(noneOf(parser.languages, feature, invalidLanguages))
     }
+
+    @Test
+    fun all_valid_declarative_languages(){
+        val feature = parser.features.find { it.id == "LANG8" }!!
+
+        val validLanguages = setOf("Haskell", "PureScript", "Elm", "Erlang", "Lisp", "Scheme", "Clojure", "Prolog", "Coq", "Julia",
+            "F#", "Elixir", "TLA+", "Nickel", "Matlab", "SAS", "R")
+
+        assert(containsExactly(parser.languages, feature, validLanguages))
+    }
 }
