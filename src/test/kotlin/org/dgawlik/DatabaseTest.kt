@@ -74,4 +74,14 @@ internal class DatabaseTest {
 
         assert(containsExactly(parser.languages, feature, validLanguages))
     }
+
+    @Test
+    fun all_valid_languages_with_fibers(){
+        val feature = parser.features.find { it.id == "LANG14" }!!
+
+        val validLanguages = setOf("Python", "C++", "Java", "C#", "JavaScript", "Go", "Swift", "Ruby", "Objective C",
+            "Rust", "Kotlin", "Scala", "F#", "Erlang", "Groovy", "Elixir", "Clojure", "PureScript", "TypeScript", "Ada")
+
+        assert(containsExactly(parser.languages, feature, validLanguages))
+    }
 }
