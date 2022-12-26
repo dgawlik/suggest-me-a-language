@@ -5,9 +5,12 @@ import org.dgawlik.domain.Feature
 import org.dgawlik.domain.Language
 import org.dgawlik.domain.NumericField
 import kotlin.math.abs
+import kotlin.math.min
 
 
 class SplitterSorterException(msg: String) : RuntimeException(msg)
+
+data class Quadruple<T1, T2, T3, T4>(val t1: T1, val t2: T2, val t3: T3, val t4: T4)
 
 
 class SplitterSorter {
@@ -25,13 +28,13 @@ class SplitterSorter {
         }
     }
 
-    fun bestSplit(languages: List<Language>, selector: Feature): Triple<List<Language>, List<Language>, Int> {
+    fun bestSplit(languages: List<Language>, selector: Feature): Quadruple<List<Language>, List<Language>, Int, Double> {
         val sorted = sort(languages, selector)
 
         var left: List<Language> = arrayListOf()
         var right: List<Language> = arrayListOf()
         var splitVal = -1
-        var splitDistance = languages.size
+        var penalty = 2.0
 
         val min: Int
         val max: Int
@@ -63,16 +66,18 @@ class SplitterSorter {
                 map[it.name]!!.value < split
             }
 
-            val distance = abs(languages.size / 2 - lhs.size)
-            if (distance < splitDistance) {
+            val m = min(lhs.size, rhs.size)
+            val t = (lhs.size + rhs.size).toDouble()
+            val p = 2*(t/2-m)/t
+            if (p < penalty) {
                 splitVal = split
-                splitDistance = distance
+                penalty = p
                 left = lhs
                 right = rhs
             }
 
         }
 
-        return Triple(left, right, splitVal)
+        return Quadruple(left, right, splitVal, penalty)
     }
 }

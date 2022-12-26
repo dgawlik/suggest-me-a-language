@@ -27,23 +27,20 @@ class Id3Tree(array: Array<Language>, features: Array<Feature>) {
                     continue
                 }
 
-                var minEntropy = Double.MAX_VALUE
+                var minPenalty = 2.0
                 var bestRule: FeatureRealization? = null
                 for (candidate in candidateFeatures) {
-                    val (lhs, rhs, splitVal) = splitterSorter.bestSplit(workArray, candidate)
+                    val (_, _, splitVal, penalty) = splitterSorter.bestSplit(workArray, candidate)
 
-                    val lhsScore = totalEntropy(lhs, candidateFeatures)
-                    val rhsScore = totalEntropy(rhs, candidateFeatures)
-
-                    if (lhsScore + rhsScore < minEntropy) {
-                        minEntropy = lhsScore + rhsScore
+                    if (penalty < minPenalty) {
+                        minPenalty = penalty
                         bestRule = FeatureRealization(candidate, splitVal)
                     }
                 }
 
                 val newCandidates = candidateFeatures.filter { it.id != bestRule!!.feature.id }
 
-                if (newCandidates.size < 34) {
+                if (newCandidates.size < 30) {
                     continue
                 }
 
@@ -86,10 +83,6 @@ class Id3Tree(array: Array<Language>, features: Array<Feature>) {
                     checks.all { it(lang) }
                 }
             }
-        }
-
-        fun totalEntropy(languages: List<Language>, features: List<Feature>): Double {
-            return features.sumOf { Histogram(it, languages).entropy() }
         }
     }
 }

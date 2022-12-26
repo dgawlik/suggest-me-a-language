@@ -15,19 +15,6 @@ internal class Id3TreeTest{
     val f2 = Feature("LANG2", "second feature", BinaryField())
 
     @Test
-    @DisplayName("should calculate total entropy")
-    fun total_entropy(){
-        val array = arrayListOf(
-            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1), FeatureRealization(f2, 0))),
-            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0), FeatureRealization(f2, 1)))
-        )
-
-        val result = Id3Tree.totalEntropy(array, arrayListOf(f1, f2))
-
-        assertEquals(2.0, result)
-    }
-
-    @Test
     @DisplayName("should create valid composite criteria")
     fun composite_criteria(){
         val array = arrayOf(
