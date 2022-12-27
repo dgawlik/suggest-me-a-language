@@ -2236,7 +2236,7 @@
 | LANG15   | Generics                 | Binary  | -       |
 | LANG16   | Exceptions               | Binary  | -       |
 | LANG17   | Conciseness              | Numeric | 1/10    |
-| LANG18   | Dependency management    | Binary  | -       | 
+| LANG18   | Package manager          | Binary  | -       | 
 | LANG19   | Lambdas support          | Binary  | -       |
 | LANG20   | Conditional compilation  | Binary  | -       |
 | LANG21   | Assembly support         | Binary  | -       |

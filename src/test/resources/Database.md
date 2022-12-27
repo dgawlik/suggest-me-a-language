@@ -2162,57 +2162,57 @@
 ### Features
 
 **<Any binary feature>**:
- * is it common to implement this way?
- * is it widely used and accepted by community?
- * is it only possible by dirty hacks?
+* is it common to implement this way?
+* is it widely used and accepted by community?
+* is it only possible by dirty hacks?
 
 **Ease of use**:
- * is it suitable for beginners?
- * are errors/bugs easy to detect?
- * does it have easy syntax mimicking natural language?
- * is it good for prototyping?
+* is it suitable for beginners?
+* are errors/bugs easy to detect?
+* does it have easy syntax mimicking natural language?
+* is it good for prototyping?
 
 **Expressiveness**:
- * can you do anything with little code?
- * can you represent simply complex concepts?
- * does it have feature rich syntax?
- * can you deal with duplications easily?
- * does it have powerful abstractions?
+* can you do anything with little code?
+* can you represent simply complex concepts?
+* does it have feature rich syntax?
+* can you deal with duplications easily?
+* does it have powerful abstractions?
 
 **Conciseness**:
- * how long is code comparable to other languages?
- * does it have strange quirks?
+* how long is code comparable to other languages?
+* does it have strange quirks?
 
-**Ecosystem stength**: 
- * is the audience growing?
- * is it on stable release train?
- * how many supporting libraries/tools are there?
+**Ecosystem stength**:
+* is the audience growing?
+* is it on stable release train?
+* how many supporting libraries/tools are there?
 
 **Community support**:
- * how many posts on StackOverflow?
- * otherwise are there any active and popular forums to ask questions?
- * does community participate in language development?
+* how many posts on StackOverflow?
+* otherwise are there any active and popular forums to ask questions?
+* does community participate in language development?
 
 **Maturity**:
- * is there ecosystem split on major versions?
- * has it been thoroughly tested by the community?
- * is it around at least 10 years?
+* is there ecosystem split on major versions?
+* has it been thoroughly tested by the community?
+* is it around at least 10 years?
 
 **Stability**:
- * is there version split in libraries?
- * are features stable?
- * does it have long-term support plan?
+* is there version split in libraries?
+* are features stable?
+* does it have long-term support plan?
 
 **Documentation strength**:
- * is standard library well documented?
- * are libraries well documented?
- * is language itself well documented?
+* is standard library well documented?
+* are libraries well documented?
+* is language itself well documented?
 
 **Job offers**:
- * number of jobs in last year relative to the top language
+* number of jobs in last year relative to the top language
 
 **Performance**:
- * benchmarks time of execution relative to the top language
+* benchmarks time of execution relative to the top language
 
 
 
@@ -2236,7 +2236,7 @@
 | LANG15   | Generics                 | Binary  | -       |
 | LANG16   | Exceptions               | Binary  | -       |
 | LANG17   | Conciseness              | Numeric | 1/10    |
-| LANG18   | Dependency management    | Binary  | -       | 
+| LANG18   | Package manager          | Binary  | -       | 
 | LANG19   | Lambdas support          | Binary  | -       |
 | LANG20   | Conditional compilation  | Binary  | -       |
 | LANG21   | Assembly support         | Binary  | -       |
