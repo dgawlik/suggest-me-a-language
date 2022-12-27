@@ -6,12 +6,10 @@ import org.dgawlik.parsing.Parser
 import java.util.*
 
 
-fun main(args: Array<String>) {
-    if (args.isEmpty()) {
-        throw RuntimeException("Path to database required.")
-    }
+fun main() {
 
-    val parser = Parser(args[0])
+    val db = BinaryField::class.java.getResource("/Database.md")!!.readText()
+    val parser = Parser(db)
     parser.parse()
 
     println("== Fill in language criteria ==\n")
