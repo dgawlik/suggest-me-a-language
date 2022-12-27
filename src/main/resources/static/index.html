@@ -13,9 +13,9 @@
         <h1 style="font-family: 'Lobster'; font-size: 56px;"> Suggest me <br> a language</h1>
 
         <div style="margin-bottom: 40px;">
-            <a href="#" style="border-radius: 0px;" x-on:click="showBrowse = true; showFillCriteria = false; showTree = false;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">search</span>&nbsp;I want to browse</a>&nbsp;
-            <a href="#" style="border-radius: 0px;" x-on:click="showBrowse = false; showFillCriteria = true; showTree = false;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">check_box</span>&nbsp;I know the criteria</a>&nbsp;
-            <a href="#" style="border-radius: 0px;" x-on:click="showBrowse = false; showFillCriteria = false; showTree = true;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">person</span>&nbsp;I need guidance</a>
+            <a class="outline" href="#" style="border-radius: 0px;" x-on:click="showBrowse = true; showFillCriteria = false; showTree = false;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">search</span>&nbsp;I want to browse</a>&nbsp;
+            <a class="outline" href="#" style="border-radius: 0px;" x-on:click="showBrowse = false; showFillCriteria = true; showTree = false;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">check_box</span>&nbsp;I know the criteria</a>&nbsp;
+            <a class="outline" href="#" style="border-radius: 0px;" x-on:click="showBrowse = false; showFillCriteria = false; showTree = true;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">person</span>&nbsp;I need guidance</a>
         </div>
 
         <div id="browse" x-show="showBrowse">
@@ -78,8 +78,8 @@
 
                 </ul>
                 <p x-text="currentQuestion"></p>
-                <a  href="#" role="button" x-on:click="traverseTreeLeft();"><span style="vertical-align: middle" class="material-symbols-outlined">close</span>&nbsp; &nbsp; No</a>
-                <a  href="#" role="button" x-on:click="traverseTreeRight();"><span style="vertical-align: middle" class="material-symbols-outlined">check</span>&nbsp; &nbsp; Yes</a>
+                <a class="outline"  href="#" role="button" x-on:click="traverseTreeLeft();"><span style="vertical-align: middle" class="material-symbols-outlined">close</span>&nbsp; &nbsp; No</a>
+                <a class="outline" href="#" role="button" x-on:click="traverseTreeRight();"><span style="vertical-align: middle" class="material-symbols-outlined">check</span>&nbsp; &nbsp; Yes</a>
             </div>
             <div>
                 <h3>Languages</h3>
