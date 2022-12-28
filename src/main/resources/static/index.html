@@ -17,6 +17,12 @@ ul li:before {
   font-weight: 700;
   font-size: 1.2em;
 }
+
+h3.heading {
+    --color: var(--primary-hover);
+    margin: 50px 0;
+    font-size: 1.75em;
+}
     </style>
 </head>
 <body>
@@ -30,7 +36,7 @@ ul li:before {
         </div>
 
         <div id="browse" x-show="showBrowse">
-            <h3>Languages</h3>
+            <h3 class="heading">Languages</h3>
             <ul>
                 <template x-for="language in languages" :key="language.name">
                     <details>
@@ -54,7 +60,7 @@ ul li:before {
 
         <div id="fillCriteria" x-show="showFillCriteria">
             <div x-data="{showExplanation: false}">
-                <h3>Fill in criteria <a x-on:click="showExplanation = !showExplanation" href="#">*</a></h3>
+                <h3 class="heading">Fill in criteria <a x-on:click="showExplanation = !showExplanation" href="#">*</a></h3>
                 <div x-show="showExplanation" style="border: 1px black solid; padding: 20px;">
                     <h4>Any binary feature</h4>
                     <ul>
@@ -148,7 +154,7 @@ ul li:before {
                 </template>
             </div>
             <div>
-                <h3>Languages</h3>
+                <h3 class="heading">Languages</h3>
                 <ul>
                     <template x-for="language in filteredLanguages" :key="language.name">
                         <details>
@@ -172,7 +178,7 @@ ul li:before {
 
         <div id="showTree" x-show="showTree">
             <div style="margin-bottom: 40px;">
-                <h3>Answer questions</h3>
+                <h3 class="heading">Answer questions</h3>
                 <ul x-html="alreadyAnswered">
 
                 </ul>
@@ -181,7 +187,7 @@ ul li:before {
                 <a class="outline" href="#" role="button" x-on:click="traverseTreeRight();"><span style="vertical-align: middle" class="material-symbols-outlined">check</span>&nbsp; &nbsp; Yes</a>
             </div>
             <div>
-                <h3>Languages</h3>
+                <h3 class="heading">Languages</h3>
                 <ul>
                     <template x-for="language in treeFilteredLanguages" :key="language.name">
                         <details>
