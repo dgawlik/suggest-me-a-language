@@ -30,7 +30,15 @@ h3.heading {
 </head>
 <body>
     <main x-data="state" class="container">
-        <h1 style="font-family: 'Lobster'; font-size: 56px;"> Suggest me <br> a language</h1>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0" nonce="pftzS8Gt"></script>
+        <h1 style="font-family: 'Lobster'; font-size: 56px; display: inline-block;"> Suggest me <br> a language</h1>
+        <div style="display: block; middle; float: right;">
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="float: right" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <br>
+            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" style="float: right;" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+        </div>
+        <br>
 
         <div style="margin-bottom: 40px;">
             <a class="outline" href="#" style="border-radius: 0px;" x-on:click="showBrowse = true; showFillCriteria = false; showTree = false;" role="button"><span style="vertical-align: middle;" class="material-symbols-outlined">search</span>&nbsp;I want to browse</a>&nbsp;
