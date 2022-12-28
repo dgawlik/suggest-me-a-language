@@ -69,7 +69,9 @@ fun main() {
 
     routes(
         "/languages" bind Method.GET to {
-            Response(OK).with(languageLens of parser.languages)
+            Response(OK).with(languageLens of parser.languages.sortedByDescending {
+                it.features.find {f -> f.feature.id == "SUPPORT6"}!!.value
+            }.toTypedArray())
         },
         "/features" bind Method.GET to {
             Response(OK).with(featureLens of parser.features)
