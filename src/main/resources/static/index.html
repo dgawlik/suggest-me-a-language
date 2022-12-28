@@ -34,7 +34,11 @@ ul li:before {
                 <template x-for="language in languages" :key="language.name">
                     <details>
                         <summary><h3 style="display: inline-block" x-text="language.name"></h3></summary>
-                        <p x-text="language.description"></p>
+
+                        <p>
+                            <span class="material-symbols-outlined" style="font-size: 1.6em;">format_quote</span>
+                            <span x-text="language.description"></span>
+                        </p>
                         <ul>
                             <template x-for="feature in language.features" >
                                 <template x-if="feature.value > 0">
@@ -50,7 +54,7 @@ ul li:before {
         <div id="fillCriteria" x-show="showFillCriteria">
             <div x-data="{showExplanation: false}">
                 <h3>Fill in criteria <a x-on:click="showExplanation = !showExplanation" href="#">*</a></h3>
-                <div x-show="showExplanation">
+                <div x-show="showExplanation" style="border: 1px black solid; padding: 7px;">
                     <h4>Any binary feature</h4>
                     <ul>
                         <li>is it common to implement this way?</li>
