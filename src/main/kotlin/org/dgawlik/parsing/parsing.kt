@@ -145,7 +145,10 @@ class Parser(val text: String) {
 
         for (row in languagesTable.rows) {
             val fs = row[1].split(Regex("\\s+")).map {
-                check("FeatureValue pattern not matching", ::ParserException){it.matches(Regex("[a-zA-Z0-9]+\\{\\d+}"))}
+                check(
+                    "FeatureValue pattern not matching",
+                    ::ParserException
+                ) { it.matches(Regex("[a-zA-Z0-9]+\\{\\d+}")) }
 
                 val match = Regex("([a-zA-Z0-9]+)\\{(\\d+)}").find(it)!!
                 val (featureId, featureValue) = match.destructured
@@ -159,7 +162,10 @@ class Parser(val text: String) {
                 }
 
                 FeatureRealization(feature, featureValue.toInt())
-            }.toTypedArray()
+            }.distinctBy { it.feature.id }.toTypedArray()
+
+            check("Missing feature in language", ::ParserException) { fs.size == features.size }
+
 
             languages += Language(row[0], row[2], fs)
         }
