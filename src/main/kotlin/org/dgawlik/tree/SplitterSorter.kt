@@ -4,7 +4,6 @@ import org.dgawlik.domain.BinaryField
 import org.dgawlik.domain.Feature
 import org.dgawlik.domain.Language
 import org.dgawlik.domain.NumericField
-import kotlin.math.abs
 import kotlin.math.min
 
 
@@ -66,9 +65,9 @@ class SplitterSorter {
                 map[it.name]!!.value < split
             }
 
-            val m = min(lhs.size, rhs.size)
-            val t = (lhs.size + rhs.size).toDouble()
-            val p = 2*(t/2-m)/t
+            val minimum = min(lhs.size, rhs.size)
+            val total = (lhs.size + rhs.size).toDouble()
+            val p = 2*(total/2-minimum)/total
             if (p < penalty) {
                 splitVal = split
                 penalty = p

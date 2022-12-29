@@ -20,7 +20,7 @@ class Id3Tree(array: Array<Language>, features: Array<Feature>) {
             queue.addLast(Pair(root, feats))
 
             while (queue.isNotEmpty()) {
-                val (node, candidateFeatures) = queue.removeFirst();
+                val (node, candidateFeatures) = queue.removeFirst()
                 val workArray = array.filter { compositeCriteria(node)(it) }
 
                 if (workArray.isEmpty() || candidateFeatures.isEmpty()) {

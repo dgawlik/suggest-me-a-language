@@ -79,7 +79,7 @@ class Table(text: String, position: Int) {
             if (pos == text.length || text[pos] == '\n') {
                 check("Unexpected trailer of table row", ::TableParsingException) {
                     val token = text.substring(snapshot until pos)
-                    token.all() { Character.isWhitespace(it) }
+                    token.all { Character.isWhitespace(it) }
                 }
                 break
             }
@@ -102,7 +102,7 @@ class Table(text: String, position: Int) {
 }
 
 
-class Parser(val text: String) {
+class Parser(private val text: String) {
 
     var languages: Array<Language> = arrayOf()
     var features: Array<Feature> = arrayOf()
