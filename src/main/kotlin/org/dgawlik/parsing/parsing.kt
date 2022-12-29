@@ -112,11 +112,10 @@ class Parser(val text: String) {
         val languagesTable = Table(text, 0)
 
         check("Doesn't have title", ::ParserException) { languagesTable.title == "Languages" }
-        check("Doesn't have 4 columns", ::ParserException) { languagesTable.columns.size == 4 }
+        check("Doesn't have 3 columns", ::ParserException) { languagesTable.columns.size == 3 }
         check("Doesn't have Language column", ::ParserException) { languagesTable.columns[0] == "Language" }
-        check("Doesn't have Feature column", ::ParserException) { languagesTable.columns[1] == "Feature" }
-        check("Doesn't have Value column", ::ParserException) { languagesTable.columns[2] == "Value" }
-        check("Doesn't have Description column", ::ParserException) { languagesTable.columns[3] == "Description" }
+        check("Doesn't have FeatureValues column", ::ParserException) { languagesTable.columns[1] == "FeatureValues" }
+        check("Doesn't have Description column", ::ParserException) { languagesTable.columns[2] == "Description" }
         check("Has blank fields", ::ParserException) { languagesTable.rows.all { oit -> oit.all { it.isNotBlank() } } }
 
         val featuresTable = Table(text, languagesTable.endingPosition)
@@ -144,28 +143,25 @@ class Parser(val text: String) {
             )
         }.toTypedArray()
 
-        var currentLanguage: Language? = null
         for (row in languagesTable.rows) {
-            if (row[0] == "*") {
-                check("Bullet point missing target", ::ParserException) { currentLanguage != null }
+            val fs = row[1].split(Regex("\\s+")).map {
+                check("FeatureValue pattern not matching", ::ParserException){it.matches(Regex("[a-zA-Z0-9]+\\{\\d+}"))}
 
-                val featureId = row[1]
+                val match = Regex("([a-zA-Z0-9]+)\\{(\\d+)}").find(it)!!
+                val (featureId, featureValue) = match.destructured
 
                 val feature = features.find { it.id == featureId }
                 check("Feature id doesn't exist", ::ParserException) { feature != null }
 
                 if (feature!!.fieldType is NumericField) {
                     val (low, high) = feature.fieldType as NumericField
-                    check("Numeric field out of bounds", ::ParserException) { row[2].toInt() in low..high }
+                    check("Numeric field out of bounds", ::ParserException) { featureValue.toInt() in low..high }
                 }
 
-                val realization = FeatureRealization(feature, row[2].toInt())
+                FeatureRealization(feature, featureValue.toInt())
+            }.toTypedArray()
 
-                currentLanguage!!.features += realization
-            } else {
-                currentLanguage = Language(row[0], row[3], arrayOf())
-                languages += currentLanguage
-            }
+            languages += Language(row[0], row[2], fs)
         }
     }
 }

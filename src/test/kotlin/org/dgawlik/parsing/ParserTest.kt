@@ -15,11 +15,9 @@ internal class ParserTest {
         val text = """
             ### Languages
 
-            | Language     | Feature | Value | Description |
-            |--------------|---------|-------|-------------|
-            | Python       | *       | *     | x           |
-            | *            | LANG1   | 1     | *           |
-            | *            | LANG17  | 5     | *           |
+            | Language     | FeatureValues       | Description |
+            |--------------|---------------------|-------------|
+            | Python       | LANG1{1} LANG17{5}  | x           |
             
             ### Features
 
@@ -44,39 +42,14 @@ internal class ParserTest {
     }
 
     @Test
-    @DisplayName("Should throw on no language")
-    fun no_language() {
-        val text = """
-            ### Languages
-
-            | Language     | Feature | Value | Description |
-            |--------------|---------|-------|-------------|
-            | *            | LANG1   | 1     | *           |
-            | *            | LANG17  | 5     | *           |
-            
-            ### Features
-
-            | Id       | Description              | Type     | Min/Max |
-            |----------|--------------------------|----------|---------|
-            | LANG1    | Ease of use              | Binary   | -       |
-            | LANG17   | Verbosity                | Numeric  | 1/10    |
-        """.trimIndent()
-
-        val parser = Parser(text)
-
-        Assertions.assertThrows(ParserException::class.java, { parser.parse() }, "Bullet point missing target")
-    }
-
-    @Test
     @DisplayName("Should throw on numeric field out of bounds")
     fun numeric_field_out_of_bounds() {
         val text = """
             ### Languages
 
-            | Language     | Feature | Value | Description |
-            |--------------|---------|-------|-------------|
-            | *            | LANG1   | 1     | *           |
-            | *            | LANG17  | 11    | *           |
+            | Language     | FeatureValues       | Description |
+            |--------------|---------------------|-------------|
+            | Python       | LANG1{1} LANG17{11} | x           |
             
             ### Features
 
@@ -97,17 +70,16 @@ internal class ParserTest {
         val text = """
             ### Languages
 
-            | Language     | Feature | Value | Description |
-            |--------------|---------|-------|-------------|
-            | *            | LANG1   | 1     | *           |
-            | *            | LANG17  | 11    | *           |
+            | Language     | FeatureValues       | Description |
+            |--------------|---------------------|-------------|
+            | Python       | LANG1{1} LANG17{7}  | x           |
             
             ### Features
 
             | Id       | Description              | Type     | Min/Max |
             |----------|--------------------------|----------|---------|
             | LANG1    | Ease of use              | Binary   | -       |
-            | LANG17   | Verbosity                | RangeX   | 1/10    |
+            | LANG17   | Verbosity                | RegeX    | 1/10    |
         """.trimIndent()
 
         val parser = Parser(text)
@@ -121,17 +93,16 @@ internal class ParserTest {
         val text = """
             ### Languages
 
-            | Language     | Feature | Value | Description |
-            |--------------|---------|-------|-------------|
-            | *            | LANG1   | 1     | *           |
-            | *            | LANG17  | 11    | *           |
+            | Language     | FeatureValues       | Description |
+            |--------------|---------------------|-------------|
+            | Python       | LANG1{1} LANG17{7}  | x           |
             
             ### Features
 
             | Id       | Description              | Type     | Min/Max |
             |----------|--------------------------|----------|---------|
             | LANG1    | Ease of use              | Binary   | -       |
-            | LANG17   | Verbosity                | Numeric  | a/b     |
+            | LANG17   | Verbosity                | RegeX    | a/b     |
         """.trimIndent()
 
         val parser = Parser(text)
@@ -145,17 +116,16 @@ internal class ParserTest {
         val text = """
             ### Languages
 
-            | Language     | Feature | Value | Description |
-            |--------------|---------|-------|-------------|
-            | *            | LANG1   | 1     | *           |
-            | *            |         | 11    | *           |
+            | Language     | FeatureValues       | Description |
+            |--------------|---------------------|-------------|
+            | Python       |                     | x           |
             
             ### Features
 
             | Id       | Description              | Type     | Min/Max |
             |----------|--------------------------|----------|---------|
             | LANG1    | Ease of use              | Binary   | -       |
-            | LANG17   | Verbosity                | Numeric  | a/b     |
+            | LANG17   | Verbosity                | RegeX    | a/b     |
         """.trimIndent()
 
         val parser = Parser(text)
