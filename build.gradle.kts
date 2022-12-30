@@ -37,9 +37,3 @@ application {
     mainModule.set("org.dgawlik")
     mainClass.set("org.dgawlik.MainKt")
 }
-
-ktor {
-    fatJar {
-        archiveFileName.set("all.jar")
-    }
-}
