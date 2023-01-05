@@ -111,56 +111,56 @@
 
 
 
-| Id       | Description              | Type    | Min/Max |
-|----------|--------------------------|---------|---------|
-| LANG1    | Ease of use              | Numeric | 1/10    |
-| LANG2    | Expressiveness           | Numeric | 1/10    |
-| LANG3    | Async programming        | Binary  | -       |
-| LANG4    | Managed memory           | Binary  | -       |
-| LANG5    | Native memory            | Binary  | -       |
-| LANG6    | Actor model              | Binary  | -       |
-| LANG7    | Functional Paradigm      | Binary  | -       |
-| LANG8    | Declarative Paradigm     | Binary  | -       |
-| LANG9    | Imperative Paradigm      | Binary  | -       |
-| LANG10   | Reactive Paradigm        | Binary  | -       |
-| LANG11   | Formal verification      | Binary  | -       |
-| LANG12   | Pattern matching         | Binary  | -       |
-| LANG13   | Object Oriented Paradigm | Binary  | -       |
-| LANG14   | Fibers/Coroutines        | Binary  | -       |
-| LANG15   | Generics                 | Binary  | -       |
-| LANG16   | Exceptions               | Binary  | -       |
-| LANG17   | Conciseness              | Numeric | 1/10    |
-| LANG18   | Package manager          | Binary  | -       | 
-| LANG19   | Lambdas support          | Binary  | -       |
-| LANG20   | Conditional compilation  | Binary  | -       |
-| LANG21   | Assembly support         | Binary  | -       |
-| LANG22   | Static Typing            | Binary  | -       |
-| LANG23   | IoC                      | Binary  | -       |
-| LANG24   | Dynamic Typing           | Binary  | -       |
-| LANG25   | Operator overloading     | Binary  | -       |
-| LANG26   | C bindings               | Binary  | -       |
-| LANG27   | Aspects                  | Binary  | -       |
-| LANG28   | Concurrent               | Binary  | -       |
-| LANG29   | Reflective               | Binary  | -       |
-| TARGET1  | Frontend development     | Binary  | -       |
-| TARGET2  | Every platform           | Binary  | -       |
-| TARGET3  | Microsoft                | Binary  | -       |
-| TARGET4  | Apple                    | Binary  | -       |
-| TARGET5  | Webservice development   | Binary  | -       |
-| TARGET6  | Embedded/hardware        | Binary  | -       |
-| TARGET7  | Data Science             | Binary  | -       |
-| TARGET8  | Scripting                | Binary  | -       |
-| TARGET9  | Mobile development       | Binary  | -       |
-| TARGET10 | Desktop development      | Binary  | -       |
-| SUPPORT1 | Ecosystem strength       | Numeric | 1/10    |
-| SUPPORT2 | Community support        | Numeric | 1/10    |
-| SUPPORT3 | Maturity                 | Numeric | 1/10    |
-| SUPPORT4 | Stability                | Numeric | 1/10    |
-| SUPPORT5 | Documentation strength   | Numeric | 1/10    |
-| SUPPORT6 | Popularity Index         | Numeric | 1/50    |
-| SUPPORT7 | Job offers               | Numeric | 1/10    |
-| SUPPORT8 | Backed by sponsors       | Binary  | -       |
-| PERF1    | Performance              | Numeric | 1/10    |
+| Id       | Description              | Type    | Min/Max | Generality |
+|----------|--------------------------|---------|---------|------------|
+| LANG1    | Ease of use              | Numeric | 1/10    | 3          |
+| LANG2    | Expressiveness           | Numeric | 1/10    | 3          |
+| LANG3    | Async programming        | Binary  | -       | 3          |
+| LANG4    | Managed memory           | Binary  | -       | 4          |
+| LANG5    | Native memory            | Binary  | -       | 3          |
+| LANG6    | Actor model              | Binary  | -       | 2          |
+| LANG7    | Functional Paradigm      | Binary  | -       | 5          |
+| LANG8    | Declarative Paradigm     | Binary  | -       | 2          |
+| LANG9    | Imperative Paradigm      | Binary  | -       | 5          |
+| LANG10   | Reactive Paradigm        | Binary  | -       | 3          |
+| LANG11   | Formal verification      | Binary  | -       | 2          |
+| LANG12   | Pattern matching         | Binary  | -       | 3          |
+| LANG13   | Object Oriented Paradigm | Binary  | -       | 5          |
+| LANG14   | Fibers/Coroutines        | Binary  | -       | 3          |
+| LANG15   | Generics                 | Binary  | -       | 2          |
+| LANG16   | Exceptions               | Binary  | -       | 2          |
+| LANG17   | Conciseness              | Numeric | 1/10    | 3          |
+| LANG18   | Package manager          | Binary  | -       | 3          |
+| LANG19   | Lambdas support          | Binary  | -       | 3          |
+| LANG20   | Conditional compilation  | Binary  | -       | 2          |
+| LANG21   | Assembly support         | Binary  | -       | 3          |
+| LANG22   | Static Typing            | Binary  | -       | 4          |
+| LANG23   | IoC                      | Binary  | -       | 2          |
+| LANG24   | Dynamic Typing           | Binary  | -       | 4          |
+| LANG25   | Operator overloading     | Binary  | -       | 1          |
+| LANG26   | C bindings               | Binary  | -       | 3          |
+| LANG27   | Aspects                  | Binary  | -       | 2          |
+| LANG28   | Concurrent               | Binary  | -       | 4          |
+| LANG29   | Reflective               | Binary  | -       | 3          |
+| TARGET1  | Frontend development     | Binary  | -       | 5          |
+| TARGET2  | Every platform           | Binary  | -       | 2          |
+| TARGET3  | Microsoft                | Binary  | -       | 2          |
+| TARGET4  | Apple                    | Binary  | -       | 2          |
+| TARGET5  | Webservice development   | Binary  | -       | 5          |
+| TARGET6  | Embedded/hardware        | Binary  | -       | 5          |
+| TARGET7  | Data Science             | Binary  | -       | 3          |
+| TARGET8  | Scripting                | Binary  | -       | 2          |
+| TARGET9  | Mobile development       | Binary  | -       | 3          |
+| TARGET10 | Desktop development      | Binary  | -       | 2          |
+| SUPPORT1 | Ecosystem strength       | Numeric | 1/10    | 3          |
+| SUPPORT2 | Community support        | Numeric | 1/10    | 2          |
+| SUPPORT3 | Maturity                 | Numeric | 1/10    | 3          |
+| SUPPORT4 | Stability                | Numeric | 1/10    | 3          |
+| SUPPORT5 | Documentation strength   | Numeric | 1/10    | 3          |
+| SUPPORT6 | Popularity Index         | Numeric | 1/50    | 3          |
+| SUPPORT7 | Job offers               | Numeric | 1/10    | 2          |
+| SUPPORT8 | Backed by sponsors       | Binary  | -       | 2          |
+| PERF1    | Performance              | Numeric | 1/10    | 3          |
 
 
 

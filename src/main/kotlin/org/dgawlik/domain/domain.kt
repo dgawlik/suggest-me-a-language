@@ -32,6 +32,6 @@ data class Language(
     }
 }
 
-data class Feature(val id: String, val description: String, val fieldType: FieldType)
+data class Feature(val id: String, val description: String, val fieldType: FieldType, val generality: Int)
 
 data class FeatureRealization(val feature: Feature, val value: Int)

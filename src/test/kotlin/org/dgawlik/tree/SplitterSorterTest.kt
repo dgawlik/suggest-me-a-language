@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 internal class SplitterSorterTest {
 
-    val f1 = Feature("LANG1", "first feature", BinaryField())
+    val f1 = Feature("LANG1", "first feature", BinaryField(), 1)
 
     @Test
     @DisplayName("Should sort correctly")

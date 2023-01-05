@@ -31,9 +31,10 @@ class Id3Tree(array: Array<Language>, features: Array<Feature>) {
                 var bestRule: FeatureRealization? = null
                 for (candidate in candidateFeatures) {
                     val (_, _, splitVal, penalty) = splitterSorter.bestSplit(workArray, candidate)
+                    val redeem = candidate.generality.toDouble() / 5.0
 
-                    if (penalty < minPenalty) {
-                        minPenalty = penalty
+                    if (penalty - redeem < minPenalty) {
+                        minPenalty = penalty - redeem
                         bestRule = FeatureRealization(candidate, splitVal)
                     }
                 }

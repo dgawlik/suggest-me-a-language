@@ -8,8 +8,8 @@ import kotlin.test.assertTrue
 
 internal class HistogramTest {
 
-    val f1 = Feature("LANG1", "first feature", BinaryField())
-    val f2 = Feature("LANG2", "second feature", NumericField(1, 4))
+    val f1 = Feature("LANG1", "first feature", BinaryField(), 1)
+    val f2 = Feature("LANG2", "second feature", NumericField(1, 4), 1)
 
     @Test
     @DisplayName("Uniform array should have 0 entropy")

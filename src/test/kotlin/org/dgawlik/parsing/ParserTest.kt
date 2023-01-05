@@ -21,10 +21,10 @@ internal class ParserTest {
             
             ### Features
 
-            | Id       | Description              | Type     | Min/Max |
-            |----------|--------------------------|----------|---------|
-            | LANG1    | Ease of use              | Binary   | -       |
-            | LANG17   | Verbosity                | Numeric  | 1/10    |
+            | Id       | Description              | Type     | Min/Max | Generality |
+            |----------|--------------------------|----------|---------|------------|
+            | LANG1    | Ease of use              | Binary   | -       | 1          |
+            | LANG17   | Verbosity                | Numeric  | 1/10    | 1          |
         """.trimIndent()
 
 
@@ -53,10 +53,10 @@ internal class ParserTest {
             
             ### Features
 
-            | Id       | Description              | Type     | Min/Max |
-            |----------|--------------------------|----------|---------|
-            | LANG1    | Ease of use              | Binary   | -       |
-            | LANG17   | Verbosity                | Numeric  | 1/10    |
+            | Id       | Description              | Type     | Min/Max | Generality |
+            |----------|--------------------------|----------|---------|------------|
+            | LANG1    | Ease of use              | Binary   | -       | 1          |
+            | LANG17   | Verbosity                | Numeric  | 1/10    | 1          |
         """.trimIndent()
 
         val parser = Parser(text)
@@ -76,10 +76,10 @@ internal class ParserTest {
             
             ### Features
 
-            | Id       | Description              | Type     | Min/Max |
-            |----------|--------------------------|----------|---------|
-            | LANG1    | Ease of use              | Binary   | -       |
-            | LANG17   | Verbosity                | RegeX    | 1/10    |
+            | Id       | Description              | Type     | Min/Max | Generality |
+            |----------|--------------------------|----------|---------|------------|
+            | LANG1    | Ease of use              | Binary   | -       | 1          |
+            | LANG17   | Verbosity                | RegeX    | 1/10    | 1          |
         """.trimIndent()
 
         val parser = Parser(text)
@@ -99,10 +99,10 @@ internal class ParserTest {
             
             ### Features
 
-            | Id       | Description              | Type     | Min/Max |
-            |----------|--------------------------|----------|---------|
-            | LANG1    | Ease of use              | Binary   | -       |
-            | LANG17   | Verbosity                | RegeX    | a/b     |
+            | Id       | Description              | Type     | Min/Max | Generality |
+            |----------|--------------------------|----------|---------|------------|
+            | LANG1    | Ease of use              | Binary   | -       | 1          |
+            | LANG17   | Verbosity                | RegeX    | a/b     | 1          |
         """.trimIndent()
 
         val parser = Parser(text)
@@ -122,10 +122,10 @@ internal class ParserTest {
             
             ### Features
 
-            | Id       | Description              | Type     | Min/Max |
-            |----------|--------------------------|----------|---------|
-            | LANG1    | Ease of use              | Binary   | -       |
-            | LANG17   | Verbosity                | RegeX    | a/b     |
+            | Id       | Description              | Type     | Min/Max | Generality |
+            |----------|--------------------------|----------|---------|------------|
+            | LANG1    | Ease of use              | Binary   | -       | 1          |
+            | LANG17   | Verbosity                | RegeX    | a/b     | 1          |
         """.trimIndent()
 
         val parser = Parser(text)

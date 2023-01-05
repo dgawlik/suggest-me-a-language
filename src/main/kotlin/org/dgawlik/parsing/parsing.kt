@@ -121,11 +121,12 @@ class Parser(private val text: String) {
         val featuresTable = Table(text, languagesTable.endingPosition)
 
         check("Doesn't have title", ::ParserException) { featuresTable.title == "Features" }
-        check("Doesn't have 4 columns", ::ParserException) { featuresTable.columns.size == 4 }
+        check("Doesn't have 5 columns", ::ParserException) { featuresTable.columns.size == 5 }
         check("Doesn't have Language column", ::ParserException) { featuresTable.columns[0] == "Id" }
         check("Doesn't have Feature column", ::ParserException) { featuresTable.columns[1] == "Description" }
         check("Doesn't have Value column", ::ParserException) { featuresTable.columns[2] == "Type" }
         check("Doesn't have Description column", ::ParserException) { featuresTable.columns[3] == "Min/Max" }
+        check("Doesn't have Generality column", ::ParserException) { featuresTable.columns[4] == "Generality" }
         check("Has blank fields", ::ParserException) { featuresTable.rows.all { oit -> oit.all { it.isNotBlank() } } }
 
         features = featuresTable.rows.map {
@@ -139,7 +140,8 @@ class Parser(private val text: String) {
                     check("Bounds pattern not matching", ::ParserException) { Regex("\\d+/\\d+").matches(it[3]) }
                     val minMax = it[3].split("/")
                     NumericField(minMax[0].toInt(), minMax[1].toInt())
-                }
+                },
+                it[4].toInt()
             )
         }.toTypedArray()
 

@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test
 
 internal class Id3TreeTest{
 
-    val f1 = Feature("LANG1", "first feature", BinaryField())
-    val f2 = Feature("LANG2", "second feature", BinaryField())
+    val f1 = Feature("LANG1", "first feature", BinaryField(), 1)
+    val f2 = Feature("LANG2", "second feature", BinaryField(), 1)
 
     @Test
     @DisplayName("should create valid composite criteria")
