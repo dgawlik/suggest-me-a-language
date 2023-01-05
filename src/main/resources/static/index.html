@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html data-theme="light">
 <head>
-    <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+    <meta property="og:url"           content="https://chooselanguage.info" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Suggest me a language" />
     <meta property="og:description"   content="Interactive compatibility matrix of programming languages" />
-    <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
+    <meta property="og:image"         content="https://upload.wikimedia.org/wikipedia/commons/8/81/Noto_Emoji_Oreo_1f389.svg" />
 
     <meta charset="UTF-8">
     <meta name="description" content="Interactive compatibility matrix of programming languages">
@@ -39,6 +39,13 @@ h3.heading {
     margin: 50px 0;
     font-size: 1.75em;
 }
+
+@media (min-width: 1200px) {
+    :root {
+        --font-size: 18px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -49,7 +56,7 @@ h3.heading {
         <div style="display: block; float: right;">
             <!-- Place this tag where you want the button to render. -->
             <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><!-- Place this tag in your head or just before your close body tag. --><script async defer src="https://buttons.github.io/buttons.js"></script>
-            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" style="margin-top: auto; margin-bottom: auto;" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" style="position: relative; top: 3px;" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
         </div>
         <br>
 
@@ -64,7 +71,7 @@ h3.heading {
             <ul>
                 <template x-for="language in languages" :key="language.name">
                     <details>
-                        <summary><h3 style="display: inline-block" x-text="language.name"></h3></summary>
+                        <summary><h4 style="display: inline-block" x-text="language.name"></h4></summary>
 
                         <p>
                             <span class="material-symbols-outlined" style="font-size: 1.6em;">format_quote</span>
@@ -86,13 +93,13 @@ h3.heading {
             <div x-data="{showExplanation: false}">
                 <h3 class="heading">Fill in criteria <a x-on:click="showExplanation = !showExplanation" href="#">*</a></h3>
                 <div x-show="showExplanation" style="border: 1px black solid; padding: 20px; border-radius: 8px; background: rgb(248, 248, 248);">
-                    <h4>Any binary feature</h4>
+                    <h5>Any binary feature</h5>
                     <ul>
                         <li>is it common to implement this way?</li>
                         <li>is it widely used and accepted by community?</li>
                         <li>is it only possible by dirty hacks?</li>
                     </ul>
-                    <h4>Ease of use</h4>
+                    <h5>Ease of use</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>is it suitable for beginners?</li>
@@ -100,7 +107,7 @@ h3.heading {
                         <li>does it have easy syntax mimicking natural language?</li>
                         <li>is it good for prototyping?</li>
                     </ul>
-                    <h4>Expressiveness</h4>
+                    <h5>Expressiveness</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>can you do anything with little code?</li>
@@ -109,58 +116,58 @@ h3.heading {
                         <li>can you deal with duplications easily?</li>
                         <li>does it have powerful abstractions?</li>
                     </ul>
-                    <h4>Conciseness</h4>
+                    <h5>Conciseness</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>how long is code comparable to other languages?</li>
                         <li>does it have strange quirks?</li>
                     </ul>
-                    <h4>Ecosystem stength</h4>
+                    <h5>Ecosystem stength</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>is the audience growing?</li>
                         <li>is it on stable release train?</li>
                         <li>how many supporting libraries/tools are there?</li>
                     </ul>
-                    <h4>Community support</h4>
+                    <h5>Community support</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>how many posts on StackOverflow?</li>
                         <li>otherwise are there any active and popular forums to ask questions?</li>
                         <li>does community participate in language development?</li>
                     </ul>
-                    <h4>Maturity</h4>
+                    <h5>Maturity</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>is there ecosystem split on major versions?</li>
                         <li>has it been thoroughly tested by the community?</li>
                         <li>is it around at least 10 years?</li>
                     </ul>
-                    <h4>Stability</h4>
+                    <h5>Stability</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>is there version split in libraries?</li>
                         <li>are features stable?</li>
                         <li>does it have long-term support plan?</li>
                     </ul>
-                    <h4>Documentation strength</h4>
+                    <h5>Documentation strength</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>is standard library well documented?</li>
                         <li>are libraries well documented?</li>
                         <li>is language itself well documented?</li>
                     </ul>
-                    <h4>Job offers</h4>
+                    <h5>Job offers</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>number of jobs in last year relative to the top language</li>
                     </ul>
-                    <h4>Performance</h4>
+                    <h5>Performance</h5>
                     <ul>
                         <li>1 to 10</li>
                         <li>benchmarks time of execution relative to the top language</li>
                     </ul>
-                    <h4>Popularity Index</h4>
+                    <h5>Popularity Index</h5>
                     <ul>
                         <li>1 to 50 (bigger better)</li>
                         <li>popularity measured by StackOverflow's survey 2022</li>
@@ -182,7 +189,7 @@ h3.heading {
                 <ul>
                     <template x-for="language in filteredLanguages" :key="language.name">
                         <details>
-                            <summary><h3 style="display: inline-block" x-text="language.name"></h3></summary>
+                            <summary><h4 style="display: inline-block" x-text="language.name"></h4></summary>
                             <p>
                                 <span class="material-symbols-outlined" style="font-size: 1.6em;">format_quote</span>
                                 <span x-text="language.description"></span>
@@ -215,7 +222,7 @@ h3.heading {
                 <ul>
                     <template x-for="language in treeFilteredLanguages" :key="language.name">
                         <details>
-                            <summary><h3 style="display: inline-block" x-text="language.name"></h3></summary>
+                            <summary><h4 style="display: inline-block" x-text="language.name"></h4></summary>
                             <p>
                                 <span class="material-symbols-outlined" style="font-size: 1.6em;">format_quote</span>
                                 <span x-text="language.description"></span>
