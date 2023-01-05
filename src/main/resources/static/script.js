@@ -97,9 +97,26 @@
 
 const featureDescription = (feature) => {
     if (feature.feature.fieldType.min) {
-        return `<span">${feature.feature.description} <progress style="display: inline-block; width: 200px; margin-top: auto; margin-bottom: auto;" value="${feature.value}" max="${feature.feature.fieldType.max}"></progress><span>`
+        return `<span>${featureMark(feature)} ${feature.feature.description} <progress style="display: inline-block; width: 200px; margin-top: auto; margin-bottom: auto;" value="${feature.value}" max="${feature.feature.fieldType.max}"></progress><span>`
     }
     else {
-        return feature.feature.description
+        return `${featureMark(feature)} ${feature.feature.description}`
     }
+};
+
+const featureMark = (feature) => {
+    const id = feature.feature.id;
+    if(id.startsWith("LANG")) {
+        return '☕';
+    }
+    else if(id.startsWith("TARGET")) {
+        return '☁';
+    }
+    else if(id.startsWith("SUPPORT")){
+        return '☔'
+    }
+    else if(id.startsWith("PERF")){
+        return '⚛'
+    }
+    else return '';
 };

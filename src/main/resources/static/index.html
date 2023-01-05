@@ -25,14 +25,8 @@ html {
     font-family: 'Open Sans', sans-serif;
 }
 
-ul li{
+ul li.features{
     list-style: none;
-}
-
-ul li:before {
-  content: '✓ ';
-  font-weight: 700;
-  font-size: 1.2em;
 }
 
 h3.heading {
@@ -80,7 +74,7 @@ h3.heading {
                         <ul>
                             <template x-for="feature in language.features" >
                                 <template x-if="feature.value > 0">
-                                    <li x-html="featureDescription(feature)"></li>
+                                    <li class="features" x-html="featureDescription(feature)"></li>
                                 </template>
                             </template>
                         </ul>
@@ -197,7 +191,7 @@ h3.heading {
                             <ul>
                                 <template x-for="feature in language.features" >
                                     <template x-if="feature.value > 0">
-                                        <li x-html="featureDescription(feature)"></li>
+                                        <li class="features" x-html="featureDescription(feature)"></li>
                                     </template>
                                 </template>
                             </ul>
@@ -230,7 +224,7 @@ h3.heading {
                             <ul>
                                 <template x-for="feature in language.features" >
                                     <template x-if="feature.value > 0">
-                                        <li x-html="featureDescription(feature)"></li>
+                                        <li class="features" x-html="featureDescription(feature)"></li>
                                     </template>
                                 </template>
                             </ul>
