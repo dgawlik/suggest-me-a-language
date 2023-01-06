@@ -110,10 +110,10 @@ const featureMark = (feature) => {
         return '🟦 ';
     }
     else if(id.startsWith("TARGET")) {
-        return '🔵 ';
+        return '🟩 ';
     }
     else if(id.startsWith("SUPPORT")){
-        return '🟩 '
+        return '🔵 '
     }
     else if(id.startsWith("PERF")){
         return '🟢 '
