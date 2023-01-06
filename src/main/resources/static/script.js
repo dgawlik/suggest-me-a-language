@@ -107,16 +107,16 @@ const featureDescription = (feature) => {
 const featureMark = (feature) => {
     const id = feature.feature.id;
     if(id.startsWith("LANG")) {
-        return '🟦 ';
+        return '■';
     }
     else if(id.startsWith("TARGET")) {
-        return '🟩 ';
+        return '▥';
     }
     else if(id.startsWith("SUPPORT")){
-        return '🔵 '
+        return '▩'
     }
     else if(id.startsWith("PERF")){
-        return '🟢 '
+        return '▣'
     }
     else return '';
 };
