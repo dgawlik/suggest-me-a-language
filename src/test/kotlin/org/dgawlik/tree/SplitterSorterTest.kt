@@ -17,8 +17,8 @@ internal class SplitterSorterTest {
     @DisplayName("Should sort correctly")
     fun should_sort() {
         val array = arrayListOf(
-            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1))),
-            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0)))
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1)), ""),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0)), "")
         )
 
         val result = SplitterSorter().sort(array, f1)
@@ -31,11 +31,11 @@ internal class SplitterSorterTest {
     @DisplayName("Should find best split")
     fun best_split() {
         val array = arrayListOf(
-            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 0))),
-            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0))),
-            Language("L3", "lang 3", arrayOf(FeatureRealization(f1, 0))),
-            Language("L4", "lang 4", arrayOf(FeatureRealization(f1, 1))),
-            Language("L5", "lang 5", arrayOf(FeatureRealization(f1, 1)))
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 0)), ""),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0)), ""),
+            Language("L3", "lang 3", arrayOf(FeatureRealization(f1, 0)), ""),
+            Language("L4", "lang 4", arrayOf(FeatureRealization(f1, 1)), ""),
+            Language("L5", "lang 5", arrayOf(FeatureRealization(f1, 1)), "")
         )
 
         val (left, right) = SplitterSorter().bestSplit(array, f1)
@@ -49,8 +49,8 @@ internal class SplitterSorterTest {
     @DisplayName("Should find best split in corner case")
     fun best_split_corner_case() {
         val array = arrayListOf(
-            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 0))),
-            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0))),
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 0)), ""),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0)), ""),
         )
 
         val (left, right) = SplitterSorter().bestSplit(array, f1)

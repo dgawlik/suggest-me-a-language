@@ -9,7 +9,8 @@ data class NumericField(val min: Int, val max: Int) : FieldType
 data class Language(
     val name: String,
     val description: String,
-    var features: Array<FeatureRealization>
+    var features: Array<FeatureRealization>,
+    var gist: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

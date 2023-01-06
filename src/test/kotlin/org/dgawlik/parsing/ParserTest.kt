@@ -15,9 +15,9 @@ internal class ParserTest {
         val text = """
             ### Languages
 
-            | Language     | FeatureValues       | Description |
-            |--------------|---------------------|-------------|
-            | Python       | LANG1{1} LANG17{5}  | x           |
+            | Language     | FeatureValues       | Description | Gist |
+            |--------------|---------------------|-------------|------|
+            | Python       | LANG1{1} LANG17{5}  | x           | -    |
             
             ### Features
 
@@ -47,9 +47,9 @@ internal class ParserTest {
         val text = """
             ### Languages
 
-            | Language     | FeatureValues       | Description |
-            |--------------|---------------------|-------------|
-            | Python       | LANG1{1} LANG17{11} | x           |
+            | Language     | FeatureValues       | Description | Gist |
+            |--------------|---------------------|-------------|------|
+            | Python       | LANG1{1} LANG17{11} | x           | -    |
             
             ### Features
 
@@ -70,9 +70,9 @@ internal class ParserTest {
         val text = """
             ### Languages
 
-            | Language     | FeatureValues       | Description |
-            |--------------|---------------------|-------------|
-            | Python       | LANG1{1} LANG17{7}  | x           |
+            | Language     | FeatureValues       | Description | Gist |
+            |--------------|---------------------|-------------|------|
+            | Python       | LANG1{1} LANG17{7}  | x           | -    |
             
             ### Features
 
@@ -93,9 +93,9 @@ internal class ParserTest {
         val text = """
             ### Languages
 
-            | Language     | FeatureValues       | Description |
-            |--------------|---------------------|-------------|
-            | Python       | LANG1{1} LANG17{7}  | x           |
+            | Language     | FeatureValues       | Description | Gist |
+            |--------------|---------------------|-------------|------|
+            | Python       | LANG1{1} LANG17{7}  | x           | -    |
             
             ### Features
 
@@ -116,9 +116,9 @@ internal class ParserTest {
         val text = """
             ### Languages
 
-            | Language     | FeatureValues       | Description |
-            |--------------|---------------------|-------------|
-            | Python       |                     | x           |
+            | Language     | FeatureValues       | Description | Gist |
+            |--------------|---------------------|-------------|------|
+            | Python       |                     | x           | -    |
             
             ### Features
 

@@ -112,10 +112,11 @@ class Parser(private val text: String) {
         val languagesTable = Table(text, 0)
 
         check("Doesn't have title", ::ParserException) { languagesTable.title == "Languages" }
-        check("Doesn't have 3 columns", ::ParserException) { languagesTable.columns.size == 3 }
+        check("Doesn't have 4 columns", ::ParserException) { languagesTable.columns.size == 4 }
         check("Doesn't have Language column", ::ParserException) { languagesTable.columns[0] == "Language" }
         check("Doesn't have FeatureValues column", ::ParserException) { languagesTable.columns[1] == "FeatureValues" }
         check("Doesn't have Description column", ::ParserException) { languagesTable.columns[2] == "Description" }
+        check("Doesn't have Gist column", ::ParserException) { languagesTable.columns[3] == "Gist" }
         check("Has blank fields", ::ParserException) { languagesTable.rows.all { oit -> oit.all { it.isNotBlank() } } }
 
         val featuresTable = Table(text, languagesTable.endingPosition)
@@ -169,7 +170,7 @@ class Parser(private val text: String) {
             check("Missing feature in language", ::ParserException) { fs.size == features.size }
 
 
-            languages += Language(row[0], row[2], fs)
+            languages += Language(row[0], row[2], fs, row[3])
         }
     }
 }

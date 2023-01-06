@@ -18,8 +18,8 @@ internal class Id3TreeTest{
     @DisplayName("should create valid composite criteria")
     fun composite_criteria(){
         val array = arrayOf(
-            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1), FeatureRealization(f2, 0))),
-            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0), FeatureRealization(f2, 1)))
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1), FeatureRealization(f2, 0)), ""),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0), FeatureRealization(f2, 1)), "")
         )
 
 

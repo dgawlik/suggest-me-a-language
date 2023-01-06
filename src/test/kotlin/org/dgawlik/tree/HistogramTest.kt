@@ -17,8 +17,8 @@ internal class HistogramTest {
 
 
         val array = arrayListOf(
-            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1))),
-            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 1)))
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1)), ""),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 1)), "")
         )
 
         val hist = Histogram(f1, array)
@@ -32,8 +32,8 @@ internal class HistogramTest {
 
 
         val array = arrayListOf(
-            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1))),
-            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0)))
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f1, 1)), ""),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f1, 0)), "")
         )
         val hist = Histogram(f1, array)
 
@@ -44,10 +44,10 @@ internal class HistogramTest {
     @DisplayName("should not exceed 1 for maximum entropy")
     fun numeric_maximum_entropy() {
         val array = arrayListOf(
-            Language("L1", "lang 1", arrayOf(FeatureRealization(f2, 1))),
-            Language("L2", "lang 2", arrayOf(FeatureRealization(f2, 2))),
-            Language("L3", "lang 3", arrayOf(FeatureRealization(f2, 3))),
-            Language("L4", "lang 4", arrayOf(FeatureRealization(f2, 4)))
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f2, 1)), ""),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f2, 2)), ""),
+            Language("L3", "lang 3", arrayOf(FeatureRealization(f2, 3)), ""),
+            Language("L4", "lang 4", arrayOf(FeatureRealization(f2, 4)), "")
         )
         val hist = Histogram(f2, array)
 
@@ -58,10 +58,10 @@ internal class HistogramTest {
     @DisplayName("should calculate conditional entropy")
     fun conditional_entropy(){
         val array = arrayListOf(
-            Language("L1", "lang 1", arrayOf(FeatureRealization(f2, 1))),
-            Language("L2", "lang 2", arrayOf(FeatureRealization(f2, 1))),
-            Language("L3", "lang 3", arrayOf(FeatureRealization(f2, 2))),
-            Language("L4", "lang 4", arrayOf(FeatureRealization(f2, 2)))
+            Language("L1", "lang 1", arrayOf(FeatureRealization(f2, 1)),""),
+            Language("L2", "lang 2", arrayOf(FeatureRealization(f2, 1)), ""),
+            Language("L3", "lang 3", arrayOf(FeatureRealization(f2, 2)), ""),
+            Language("L4", "lang 4", arrayOf(FeatureRealization(f2, 2)), "")
         )
         val parentHist = Histogram(f2, array)
 
