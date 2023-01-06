@@ -119,10 +119,10 @@
 | LANG4    | Managed memory           | Binary  | -       | 4          |
 | LANG5    | Native memory            | Binary  | -       | 3          |
 | LANG6    | Actor model              | Binary  | -       | 2          |
-| LANG7    | Functional Paradigm      | Binary  | -       | 5          |
-| LANG8    | Declarative Paradigm     | Binary  | -       | 2          |
-| LANG9    | Imperative Paradigm      | Binary  | -       | 5          |
-| LANG10   | Reactive Paradigm        | Binary  | -       | 3          |
+| LANG7    | Functional Paradigm      | Binary  | -       | 4          |
+| LANG8    | Declarative Paradigm     | Binary  | -       | 5          |
+| LANG9    | Imperative Paradigm      | Binary  | -       | 2          |
+| LANG10   | Reactive Paradigm        | Binary  | -       | 1          |
 | LANG11   | Formal verification      | Binary  | -       | 2          |
 | LANG12   | Pattern matching         | Binary  | -       | 3          |
 | LANG13   | Object Oriented Paradigm | Binary  | -       | 5          |
@@ -142,16 +142,16 @@
 | LANG27   | Aspects                  | Binary  | -       | 2          |
 | LANG28   | Concurrent               | Binary  | -       | 4          |
 | LANG29   | Reflective               | Binary  | -       | 3          |
-| TARGET1  | Frontend development     | Binary  | -       | 5          |
+| TARGET1  | Frontend development     | Binary  | -       | 3          |
 | TARGET2  | Every platform           | Binary  | -       | 2          |
 | TARGET3  | Microsoft                | Binary  | -       | 2          |
 | TARGET4  | Apple                    | Binary  | -       | 2          |
 | TARGET5  | Webservice development   | Binary  | -       | 5          |
-| TARGET6  | Embedded/hardware        | Binary  | -       | 5          |
-| TARGET7  | Data Science             | Binary  | -       | 3          |
+| TARGET6  | Embedded/hardware        | Binary  | -       | 4          |
+| TARGET7  | Data Science             | Binary  | -       | 2          |
 | TARGET8  | Scripting                | Binary  | -       | 2          |
-| TARGET9  | Mobile development       | Binary  | -       | 3          |
-| TARGET10 | Desktop development      | Binary  | -       | 2          |
+| TARGET9  | Mobile development       | Binary  | -       | 1          |
+| TARGET10 | Desktop development      | Binary  | -       | 1          |
 | SUPPORT1 | Ecosystem strength       | Numeric | 1/10    | 3          |
 | SUPPORT2 | Community support        | Numeric | 1/10    | 2          |
 | SUPPORT3 | Maturity                 | Numeric | 1/10    | 3          |

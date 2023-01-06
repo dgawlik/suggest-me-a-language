@@ -41,7 +41,7 @@ class Id3Tree(array: Array<Language>, features: Array<Feature>) {
 
                 val newCandidates = candidateFeatures.filter { it.id != bestRule!!.feature.id }
 
-                if (newCandidates.size < 35) {
+                if (newCandidates.size < 33) {
                     continue
                 }
 
